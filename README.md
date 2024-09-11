@@ -68,7 +68,10 @@ tin-solid:
 
 ### Execute Simulation
 
-Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/setup.py) to generate the mesh, the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/simdata/01/case.sif) with pyelmer, run ElmerGrid and ElmerSolver.
+
+Run [ geometry.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/geometry.py) to generate the simulation mesh.
+
+Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/setup.py) to generate the mesh (using geometry.py), the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/simdata/01/case.sif) with pyelmer, run ElmerGrid and ElmerSolver.
 
 
 
@@ -79,4 +82,8 @@ The main features of [Test-CZ](https://github.com/nemocrys/ismcg-examples/tree/m
 - Induction heating of the crucible
 - Phase change: the interface between crystal and melt is shifted into the isothermal of the melting point
 
+
+2D steady-state electromagnetism and heat transfer simulation of the NEMOCRYS Test-CZ Furnace:
+
 <img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/mesh.png">
+
