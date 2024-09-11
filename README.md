@@ -6,14 +6,14 @@ TestCZ case \
 both cases with link. Additional and more advanced examples Adved's cases
 
 ## Computational setup
-The nessesary software to setup and execute crystal growth numerical simulations is included in our opencgs docker container. \
-For mesh generation is utilised [objectgmsh](https://github.com/nemocrys/objectgmsh), a gmsh wrapper that highly reduce  modelling effort. \
-To execute the simulations [Pyelmer](https://github.com/nemocrys/pyelmer), which provides an integrated workflow to compose the .sif file and set up [ElmerFEM](https://www.elmerfem.org/blog/) simulations from Python.
+The necessary software to  set up and execute crystal growth numerical simulations is included in our opencgs Docker container. \
+For mesh generation, [objectgmsh](https://github.com/nemocrys/objectgmsh), a gmsh wrapper that greatly reduces  modelling effort, is utilised. \
+To execute the simulations, [Pyelmer](https://github.com/nemocrys/pyelmer) is used, which provides an integrated workflow to compose the .sif file and set up [ElmerFEM](https://www.elmerfem.org/blog/) simulations from Python.
 
 ### Docker
 
-An installation of [Docker](https://docs.docker.com/get-started/get-docker/) is required in order to be able to work with [opencgs](https://hub.docker.com/r/nemocrys/opencgs) container.  \
-Then through ```docker pull nemocrys/opencgs:v1.0.1 ``` the latest version of opencgs image is downloaded from Docker Hub.
+An installation of [Docker](https://docs.docker.com/get-started/get-docker/)  is required to work with the [opencgs](https://hub.docker.com/r/nemocrys/opencgs) container.  \
+Then through ```docker pull nemocrys/opencgs:v1.0.1 ```, the latest version of opencgs image is downloaded from Docker Hub.
 
 
 
