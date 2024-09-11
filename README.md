@@ -1,13 +1,13 @@
 # ismcg-examples
 
-The Simulation examples for the ISMCG \
+The Simulation examples for ISMCG 
 
-This repository contains 2 2D cases of Czochralski crystal growth using [Elmer](https://www.elmerfem.org/blog/).
+This repository contains two axisymmetric steady-state 2D cases of Czochralski crystal growth using [Elmer](https://www.elmerfem.org/blog/).
 
 - [Demo-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/DemoCZ) case 
 - [Test-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/TestCZ) case 
 
-Additional and more advanced examples that developed by the [ Model experiments group ](https://www.ikz-berlin.de/en/research/materials-science/section-fundamental-description-1)  can be found here : [Opencgs examples](https://github.com/nemocrys/opencgs_examples?tab=readme-ov-file) 
+Additional and more advanced examples developed by the [ Model experiments group ](https://www.ikz-berlin.de/en/research/materials-science/section-fundamental-description-1) can be found here: [Opencgs examples](https://github.com/nemocrys/opencgs_examples?tab=readme-ov-file) 
 
 
 ## Computational setup
@@ -29,7 +29,7 @@ To run the docker container on Windows execute the following command in the dire
 docker run -it --rm -v ${PWD}:/home/workdir nemocrys/opencgs:v1.0.1 bash
 ```
 
-On Linux use:
+On Linux, use:
 
 ```
 docker run -it --rm -v $PWD:/home/workdir -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) nemocrys/opencgs:v1.0.1 bash
@@ -44,12 +44,22 @@ Visualization in the Docker container is not possible.
 To locally visualize the simulation mesh, [Gmsh](https://gmsh.info/) needs to be installed. \
 A post-processing visualization engine, [ParaView](https://www.paraview.org/), is also necessary.
 
-## Simualtion Configuration
+## Simulation  Configuration
 
-The configuration of the simulation is stored in yml-files. \
+The configuration of the simulation is stored in yml-files. 
 
 - The geometry parameters are defined in [config_geometry.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_geometry.yml) that is generated using gmsh in [geometry.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/geometry.py).
 - the employed solvers [ config_elmer.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_elmer.yml) , while the  material properties (all in SI units) in [config_mat.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_mat.yml).
 - Specific parameters for this simulation, e.g. heater powers, are defined in [ config_sim.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_sim.yml).
 
-Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/setup.py) to generate the mesh and the .sif file with pyelmer and finally run Elmer. 
+Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/setup.py) to generate the mesh and the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/simdata/01/case.sif)  file with pyelmer and finally run Elmer. 
+
+## Model description
+
+The main features of [Test-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/TestCZ) model are:
+- Heat transfer through conduction and radiation
+- Induction heating of the crucible
+- Phase change: the interface between crystal and melt is shifted into the isothermal of the melting point
+
+
+<img src="TestCZ/mesh.png" alt="Geometry and mesh" width="300"/>
