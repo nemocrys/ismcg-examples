@@ -42,7 +42,7 @@ This will open a docker container in interactive mode and map your working direc
 Visualization in the Docker container is not possible. 
 
 To locally visualize the simulation mesh, [Gmsh](https://gmsh.info/) needs to be installed. \
-A post-processing visualization engine, [ParaView](https://www.paraview.org/), is recommended.
+A post-processing visualization engine, [ParaView](https://www.paraview.org/), is also necessary.
 
 ## Simualtion Configuration
 
