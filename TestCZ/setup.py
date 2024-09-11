@@ -173,8 +173,8 @@ def simulation_pyelmer(
 
 if __name__ == "__main__":
     sim_dir = "./simdata/01"
-    #if os.path.exists(sim_dir):
-    #    raise ValueError("Please remove the old simulation directory.")
+    if os.path.exists(sim_dir):
+        raise ValueError("Please remove the old simulation directory.")
 
     with open("config_geometry.yml") as f:
         config_geo = yaml.safe_load(f)

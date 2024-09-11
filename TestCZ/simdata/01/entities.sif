@@ -1,0 +1,122 @@
+!------ Skeleton for body section -----
+Body 1
+  Name = melt
+End
+
+Body 2
+  Name = crucible
+End
+
+Body 3
+  Name = crystal
+End
+
+Body 4
+  Name = seed
+End
+
+Body 5
+  Name = axis_top
+End
+
+Body 6
+  Name = inductor
+End
+
+Body 7
+  Name = crucible_adapter
+End
+
+Body 8
+  Name = axis_bt
+End
+
+Body 9
+  Name = vessel
+End
+
+Body 10
+  Name = atmosphere
+End
+
+!------ Skeleton for boundary section -----
+Boundary Condition 1
+  Name = if_melt_crystal
+End
+
+Boundary Condition 2
+  Name = if_crucible__melt
+End
+
+Boundary Condition 3
+  Name = if_crucible__crucible_adapter
+End
+
+Boundary Condition 4
+  Name = if_crucible_adapter__axis_bt
+End
+
+Boundary Condition 5
+  Name = if_axis_bt__vessel
+End
+
+Boundary Condition 6
+  Name = if_crystal__seed
+End
+
+Boundary Condition 7
+  Name = if_seed__axis_top
+End
+
+Boundary Condition 8
+  Name = if_axis_top__vessel
+End
+
+Boundary Condition 9
+  Name = if_inductor__inductor_inside
+End
+
+Boundary Condition 10
+  Name = bnd_crystal
+End
+
+Boundary Condition 11
+  Name = bnd_melt
+End
+
+Boundary Condition 12
+  Name = bnd_crucible
+End
+
+Boundary Condition 13
+  Name = bnd_crucible_adapter
+End
+
+Boundary Condition 14
+  Name = bnd_axis_bt
+End
+
+Boundary Condition 15
+  Name = bnd_seed
+End
+
+Boundary Condition 16
+  Name = bnd_axis_top
+End
+
+Boundary Condition 17
+  Name = bnd_vessel
+End
+
+Boundary Condition 18
+  Name = bnd_ind
+End
+
+Boundary Condition 19
+  Name = bnd_outer_vessel
+End
+
+Boundary Condition 20
+  Name = symmetry_axis
+End
+

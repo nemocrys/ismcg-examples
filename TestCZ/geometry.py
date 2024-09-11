@@ -77,6 +77,28 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     #--------------------------------------------- Inductors --------------------------------------------- #
     ind = inductor(model,2, **config["inductor"],name="inductor")
     ind_cut = inductor_filling(model,2, **config["inductor"],name="inductor_cut")
+    
+    # x = config["inductor"]["X0"][0]
+    # y = config["inductor"]["X0"][1]
+    # for _ in range(config["inductor"]["n"]):
+    #     circle_1d = occ.addCircle(x, y, 0, config["inductor"]["d"] / 2)
+    #     circle = occ.addSurfaceFilling(occ.addCurveLoop([circle_1d]))
+    #     hole_1d = occ.addCircle(x, y, 0, config["inductor"]["d_in"] / 2)
+    #     hole = occ.addSurfaceFilling(occ.addCurveLoop([hole_1d]))
+    #     occ.synchronize()
+    #     occ.cut([(2, circle)], [(2, hole)])
+    #     #ind.geo_ids.append(circle)
+    #     y += config["inductor"]["g"] + config["inductor"]["d"]
+    # ind = Shape(model, 2, "inductor",[circle])
+
+
+    # for _ in range(config["inductor"]["n"]):
+    #     hole_1d = occ.addCircle(x, y, 0, config["inductor"]["d_in"] / 2)
+    #     hole = occ.addSurfaceFilling(occ.addCurveLoop([hole_1d]))
+    #     occ.synchronize()
+    #     #ind_cut.geo_ids.append(hole)
+    #     y += config["inductor"]["g"] + config["inductor"]["d"]
+    #     ind_cut = Shape(model, 2, "ind_cut",[hole])
     #--------------------------------------------- crucible_adapter --------------------------------------------- #
     crucible_adapter = Shape(model,2,"crucible_adapter",[
             occ.add_rectangle(
@@ -189,6 +211,7 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     MeshControlExponential(model, if_crucible__melt, melt.mesh_size / 5, exp=1.6, fact=3)
     MeshControlExponential(model, bnd_ind, melt.mesh_size / 5, exp=1.6, fact=3)
 
+    # mesh colour
     for body in [ crucible,axis_bt,crucible_adapter]: 
         gmsh.model.setColor(body.dimtags, 0,0,50)  # black
     gmsh.model.setColor(melt.dimtags, 192,192,192)  # blue

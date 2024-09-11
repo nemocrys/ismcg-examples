@@ -1,0 +1,549 @@
+Header
+  CHECK KEYWORDS "Warn"
+  Mesh DB "." "."
+End
+
+Simulation
+  Max Output Level = 4
+  Coordinate System = Axi Symmetric
+  Simulation Type = Steady state
+  Steady State Max Iterations = 10
+  Output File = case.result
+  Output Intervals = 0
+  Angular Frequency = 84823.00164692441
+End
+
+Constants
+  Stefan Boltzmann = 5.6704e-08
+End
+
+! eqn_main
+Equation 1
+  Active Solvers(4) = 1 2 3 5   ! MagnetoDynamics2DHarmonic, MagnetoDynamicsCalcFields, HeatSolver, MeshUpdate, 
+End
+
+! eqn_phase_change
+Equation 2
+  Active Solvers(1) = 4   ! SteadyPhaseChange, 
+End
+
+
+! MagnetoDynamics2DHarmonic
+Solver 1
+  Equation = MgDyn2DHarmonic
+  Procedure = "MagnetoDynamics2D" "MagnetoDynamics2DHarmonic"
+  Variable = Potential[Potential Re:1 Potential Im:1]
+  Variable Dofs = 2
+  Exec Solver = Always
+  Nonlinear System Convergence Tolerance = 1e-05
+  Nonlinear System Max Iterations = 1000
+  Nonlinear System Relaxation Factor = 0.7
+  Steady State Convergence Tolerance = 1e-06
+  Stabilize = True
+  Optimize Bandwidth = True
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 1000
+  Linear System Preconditioning = ILU
+  Linear System Precondition Recompute = 1
+  Linear System Convergence Tolerance = 1e-07
+  Linear System Abort Not Converged = True
+  Linear System Residual Output = 1
+  Angular Frequency = 84823.00164692441
+End
+
+! MagnetoDynamicsCalcFields
+Solver 2
+  Equation = CalcFields
+  Procedure = "MagnetoDynamics" "MagnetoDynamicsCalcFields"
+  Potential Variable = Potential
+  Calculate Joule Heating = True
+  Calculate Magnetic Field Strength = True
+  Calculate Electric Field = True
+  Calculate Current Density = True
+  Calculate JxB = Logical True
+  Exec Solver = Always
+  Calculate Nodal Fields = Logical False
+  Calculate Elemental Fields = Logical True
+  Angular Frequency = 84823.00164692441
+End
+
+! HeatSolver
+Solver 3
+  Equation = Heat Equation
+  Procedure = "HeatSolve" "HeatSolver"
+  Variable = "Temperature"
+  Variable Dofs = 1
+  Calculate Loads = True
+  Exec Solver = Always
+  Nonlinear System Convergence Tolerance = 1e-05
+  Nonlinear System Max Iterations = 1000
+  Nonlinear System Relaxation Factor = 0.7
+  Steady State Convergence Tolerance = 1e-06
+  Stabilize = True
+  Optimize Bandwidth = True
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 10000
+  Linear System Preconditioning = ILU
+  Linear System Precondition Recompute = 1
+  Linear System Convergence Tolerance = 1e-09
+  Linear System Abort Not Converged = True
+  Linear System Residual Output = 1
+  Smart Heater Control After Tolerance = 0.01
+End
+
+! SteadyPhaseChange
+Solver 4
+  Equation = PhaseSurface
+  Variable = "PhaseSurface"
+  Procedure = "SteadyPhaseChange" "SteadyPhaseChange"
+  Triple Point Fixed = Logical True
+End
+
+! MeshUpdate
+Solver 5
+  Equation = Mesh Update
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Preconditioning = ILU1
+  Linear System Max Iterations = 10000
+  Linear System Convergence Tolerance = 1e-09
+  Linear System Residual Output = 1
+  Steady State Convergence Tolerance = 1e-06
+End
+
+! ResultOutputSolver
+Solver 6
+  Exec Solver = after saving
+  Equation = "ResultOutput"
+  Procedure = "ResultOutputSolve" "ResultOutputSolver"
+  VTU Format = True
+  Save Geometry Ids = Logical True
+End
+
+! SaveLine
+Solver 7
+  Exec Solver = after all
+  Equation = "SaveLine"
+  Procedure = "SaveData" "SaveLine"
+  Filename = "phase-if.dat"
+  Output Directory = ./results
+  Variable 1 = Temperature
+End
+
+
+! copper-inductor
+Material 1
+  Density = 8960.0
+  Electric Conductivity = 0.0
+  Emissivity = 0.2
+  Heat Capacity = 384.4
+  Heat Conductivity = 390.0
+  Relative Permeability = 1
+  Relative Permittivity = 1
+End
+
+! tin-solid
+Material 2
+  Density = 7179.0
+  Electric Conductivity = 4380000.0
+  Emissivity = 0.064
+  Heat Capacity = 244.0
+  Heat Conductivity = 60.0
+  Relative Permeability = 1
+  Relative Permittivity = 1
+  Solid = Logical True
+  Melting Point = 505
+  Latent Heat = 59600.0
+End
+
+! tin-liquid
+Material 3
+  Density = 6980.0
+  Electric Conductivity = 2080000.0
+  Emissivity = 0.064
+  Heat Capacity = 252.7
+  Heat Conductivity = 29.0
+  Relative Permeability = 1
+  Relative Permittivity = 1
+  Liquid = Logical True
+End
+
+! graphite-CZ3R6300
+Material 4
+  Density = 1730.0
+  Electric Conductivity = 58800.0
+  Emissivity = 0.7
+  Heat Capacity = 1237.0
+  Heat Conductivity = 65
+  Relative Permeability = 1
+  Relative Permittivity = 1
+End
+
+! steel-1.4541
+Material 5
+  Density = 7900.0
+  Electric Conductivity = 1370000.0
+  Emissivity = 0.2
+  Heat Capacity = 470.0
+  Heat Conductivity = 15.0
+  Relative Permeability = 1
+  Relative Permittivity = 1
+End
+
+! air
+Material 6
+  Density = 1.1885
+  Electric Conductivity = 0.0
+  Heat Capacity = 1006.4
+  Heat Conductivity = 0.025873
+  Relative Permeability = 1
+  Relative Permittivity = 1
+End
+
+
+! inductor
+Body 1
+  Target Bodies(1) = 6
+  Equation = 1  ! eqn_main
+  Initial Condition = 1  ! T_inductor
+  Material = 1  ! copper-inductor
+  Body Force = 1  ! Current Density
+End
+
+! crystal
+Body 2
+  Target Bodies(1) = 3
+  Equation = 1  ! eqn_main
+  Initial Condition = 2  ! T_crystal
+  Material = 2  ! tin-solid
+  Body Force = 2  ! joule_heat
+End
+
+! melt
+Body 3
+  Target Bodies(1) = 1
+  Equation = 1  ! eqn_main
+  Initial Condition = 3  ! T_melt
+  Material = 3  ! tin-liquid
+  Body Force = 2  ! joule_heat
+End
+
+! crucible
+Body 4
+  Target Bodies(1) = 2
+  Equation = 1  ! eqn_main
+  Initial Condition = 4  ! T_crucible
+  Material = 4  ! graphite-CZ3R6300
+  Body Force = 2  ! joule_heat
+End
+
+! seed
+Body 5
+  Target Bodies(1) = 4
+  Equation = 1  ! eqn_main
+  Initial Condition = 5  ! T_seed
+  Material = 2  ! tin-solid
+  Body Force = 2  ! joule_heat
+End
+
+! axis_top
+Body 6
+  Target Bodies(1) = 5
+  Equation = 1  ! eqn_main
+  Initial Condition = 6  ! T_axis_top
+  Material = 5  ! steel-1.4541
+  Body Force = 2  ! joule_heat
+End
+
+! crucible_adapter
+Body 7
+  Target Bodies(1) = 7
+  Equation = 1  ! eqn_main
+  Initial Condition = 7  ! T_crucible_adapter
+  Material = 4  ! graphite-CZ3R6300
+  Body Force = 2  ! joule_heat
+End
+
+! axis_bt
+Body 8
+  Target Bodies(1) = 8
+  Equation = 1  ! eqn_main
+  Initial Condition = 8  ! T_axis_bt
+  Material = 5  ! steel-1.4541
+  Body Force = 2  ! joule_heat
+End
+
+! vessel
+Body 9
+  Target Bodies(1) = 9
+  Equation = 1  ! eqn_main
+  Initial Condition = 9  ! T_vessel
+  Material = 5  ! steel-1.4541
+  Body Force = 2  ! joule_heat
+End
+
+! atmosphere
+Body 10
+  Target Bodies(1) = 10
+  Equation = 1  ! eqn_main
+  Initial Condition = 10  ! T_atmosphere
+  Material = 6  ! air
+  Body Force = 2  ! joule_heat
+End
+
+! melt_crystal_if
+Body 11
+  Target Bodies(1) = 11
+  Equation = 2  ! eqn_phase_change
+  Initial Condition = 11  ! t0_phase_change
+  Material = 2  ! tin-solid
+End
+
+
+! if_melt_crystal
+Boundary Condition 1
+  Save Scalars = Logical True
+  Save Line = Logical True
+  Smart Heater Boundary = Logical True
+  Smart Heater Temperature = 505
+  Phase Change = Logical True
+  Phase Velocity 1 = 0
+  Phase Velocity 2 = 0
+  Melting Point = 505
+  Latent Heat = 59600.0
+  Normal Target Body = 2
+  Heat Flux = Variable Coordinate 1
+    Real Procedure "SteadyPhaseChange" "MeltingHeat"
+  Mesh Update 1 = 0
+  Mesh Update 2 = Equals PhaseSurface
+  Body Id = Integer 11
+  Target Boundaries(1) = 11
+End
+
+! bnd_melt
+Boundary Condition 2
+  Radiation = Diffuse Gray
+  Heat Transfer Coefficient = 1.0
+  External Temperature = 293.15
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 21
+End
+
+! bnd_crystal
+Boundary Condition 3
+  Radiation = Diffuse Gray
+  Heat Transfer Coefficient = 1.0
+  External Temperature = 293.15
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 20
+End
+
+! bnd_crucible
+Boundary Condition 4
+  Radiation = Diffuse Gray
+  Save Scalars = Logical True
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 22
+End
+
+! bnd_crucible_adapter
+Boundary Condition 5
+  Radiation = Diffuse Gray
+  Save Scalars = Logical True
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 23
+End
+
+! bnd_axis_bt
+Boundary Condition 6
+  Radiation = Diffuse Gray
+  Save Scalars = Logical True
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 24
+End
+
+! bnd_seed
+Boundary Condition 7
+  Radiation = Diffuse Gray
+  Save Scalars = Logical True
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 25
+End
+
+! bnd_axis_top
+Boundary Condition 8
+  Radiation = Diffuse Gray
+  Save Scalars = Logical True
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 26
+End
+
+! bnd_vessel
+Boundary Condition 9
+  Radiation = Diffuse Gray
+  Save Scalars = Logical True
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 27
+End
+
+! bnd_ind
+Boundary Condition 10
+  Radiation = Diffuse Gray
+  Save Scalars = Logical True
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 28
+End
+
+! if_crucible__melt
+Boundary Condition 11
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 12
+End
+
+! if_crucible__crucible_adapter
+Boundary Condition 12
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 13
+End
+
+! if_crucible_adapter__axis_bt
+Boundary Condition 13
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 14
+End
+
+! if_axis_bt__vessel
+Boundary Condition 14
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 15
+End
+
+! if_crystal__seed
+Boundary Condition 15
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 16
+End
+
+! if_seed__axis_top
+Boundary Condition 16
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 17
+End
+
+! if_axis_top__vessel
+Boundary Condition 17
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 18
+End
+
+! if_inductor__inductor_inside
+Boundary Condition 18
+  Temperature = 293.15
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 19
+End
+
+! bnd_outer_vessel
+Boundary Condition 19
+  Temperature = 293.15
+  Potential Re = 0
+  Potential Im = 0
+  Mesh Update 1 = 0
+  Mesh Update 2 = 0
+  Target Boundaries(1) = 29
+End
+
+! symmetry_axis
+Boundary Condition 20
+  Mesh Update 1 = 0
+  Target Boundaries(1) = 30
+End
+
+
+! Current Density
+Body Force 1
+  Current Density = 3536776.513153229
+End
+
+! joule_heat
+Body Force 2
+  Joule Heat = Logical True
+  Smart Heater Control = Logical True
+  Heat Source = 0
+End
+
+
+! T_inductor
+Initial Condition 1
+  Temperature = 293.15
+End
+
+! T_crystal
+Initial Condition 2
+  Temperature = 293.15
+End
+
+! T_melt
+Initial Condition 3
+  Temperature = 506
+End
+
+! T_crucible
+Initial Condition 4
+  Temperature = 520
+End
+
+! T_seed
+Initial Condition 5
+  Temperature = 420
+End
+
+! T_axis_top
+Initial Condition 6
+  Temperature = 303.15
+End
+
+! T_crucible_adapter
+Initial Condition 7
+  Temperature = 313.15
+End
+
+! T_axis_bt
+Initial Condition 8
+  Temperature = 323.15
+End
+
+! T_vessel
+Initial Condition 9
+  Temperature = 293.15
+End
+
+! T_atmosphere
+Initial Condition 10
+  Temperature = 293.15
+End
+
+! t0_phase_change
+Initial Condition 11
+  Temperature = 505
+End
+

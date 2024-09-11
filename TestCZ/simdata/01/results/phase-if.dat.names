@@ -1,0 +1,19 @@
+Metadata for SaveLine file: ./results/phase-if.dat
+Elmer version: 9.0
+Elmer revision: c37d48654
+Elmer compilation date: 2024-04-26
+Solver input file: case.sif
+File started at: 2024/09/11 08:03:05
+Number of data nodes for each step
+  bc nodes: 9
+  polyline nodes: 0
+  circle nodes: 0
+  isocurve nodes: 0
+Data on different columns
+  1: Call count
+  2: Boundary condition
+  3: Node index
+  4: coordinate 1
+  5: coordinate 2
+  6: coordinate 3
+  7: temperature

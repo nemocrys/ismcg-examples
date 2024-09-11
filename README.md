@@ -1,9 +1,14 @@
 # ismcg-examples
-Simulation examples for the ISMCG \
 
-DemoCZ case \
-TestCZ case \
-both cases with link. Additional and more advanced examples Adved's cases
+The Simulation examples for the ISMCG \
+
+This repository contains 2 2D cases of Czochralski crystal growth using [Elmer](https://www.elmerfem.org/blog/).
+
+- [Demo-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/DemoCZ) case 
+- [Test-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/TestCZ) case 
+
+Additional and more advanced examples that developed by the [ Model experiments group ](https://www.ikz-berlin.de/en/research/materials-science/section-fundamental-description-1)  can be found here : [Opencgs examples](https://github.com/nemocrys/opencgs_examples?tab=readme-ov-file) 
+
 
 ## Computational setup
 The necessary software to  set up and execute crystal growth numerical simulations is included in our opencgs Docker container. \
@@ -34,8 +39,17 @@ This will open a docker container in interactive mode and map your working direc
 
 ### Visualization
 
-Visualization in the Docker container is not possible. Hence, a post-processing visualization engine, [ParaView](https://www.paraview.org/), is recommended 
+Visualization in the Docker container is not possible. 
 
-## Configuration
+To locally visualize the simulation mesh, [Gmsh](https://gmsh.info/) needs to be installed. \
+A post-processing visualization engine, [ParaView](https://www.paraview.org/), is recommended.
 
-dedcribe the included files 
+## Simualtion Configuration
+
+The configuration of the simulation is stored in yml-files. \
+
+- The geometry parameters are defined in [config_geometry.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_geometry.yml) that is generated using gmsh in [geometry.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/geometry.py).
+- the employed solvers [ config_elmer.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_elmer.yml) , while the  material properties (all in SI units) in [config_mat.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_mat.yml).
+- Specific parameters for this simulation, e.g. heater powers, are defined in [ config_sim.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_sim.yml).
+
+Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/setup.py) to generate the mesh and the .sif file with pyelmer and finally run Elmer. 

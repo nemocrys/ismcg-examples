@@ -1,8 +1,5 @@
 # setup for Elmer simulation / solvers
 
-# Evrything at pyelmer/examples
-
-
 axisymmetric_steady:
   Max Output Level: 4
   Coordinate System: Axi Symmetric
@@ -76,15 +73,6 @@ ResultOutputSolver:
   Procedure: '"ResultOutputSolve" "ResultOutputSolver"'
   VTU Format: True
   Save Geometry Ids: 'Logical True'
-  # Scalar Field 1: '"Temperature"'
-  # Scalar Field 2: '"Heat Conductivity"'
-  # Scalar Field 3: '"Temperature Loads"'
-  # Scalar Field 4: '"Potential"'
-  # Scalar Field 5: '"Joule Heating"'
-  # Scalar Field 6: '"Magnetic Flux Density"'
-  # Scalar Field 7: '"Phase Surface"'
-  # Scalar Field 8: '"Mesh Update"'
-  # Scalar Field 9: '"Mesh Velocity"'
 
 SteadyPhaseChange:
   Equation: PhaseSurface
@@ -101,7 +89,6 @@ MeshUpdate:
   Linear System Residual Output: 1
   Steady State Convergence Tolerance: 1.0e-6
 
-
 SaveLine:
   Exec Solver: 'after all'
   Equation: '"SaveLine"'
@@ -109,5 +96,3 @@ SaveLine:
   Filename: '"phase-if.dat"'
   Output Directory: './results'
   Variable 1: Temperature
-
-
