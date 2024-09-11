@@ -43,7 +43,7 @@ iron: #cast iron but zero el. cond.
   Heat Capacity : 500
   Heat Conductivity : 50
   Emissivity : 0.5
-  #! Electric Conductivity : 2.0e6  
+  # Electric Conductivity : 2.0e6  
   Electric Conductivity : 0.0 # !!!zero!!!
   Relative Permeability : 1
   Relative Permittivity: 1
@@ -59,19 +59,3 @@ air:
   Relative Permeability : 1
   Relative Permittivity: 1
 
-
-# air:        #DONE
-#   Density: 1.1885  # 20°C
-#   Electric Conductivity: 0.0 
-#   Heat Capacity: 1006.4  # 20°C
-#   Heat Conductivity: 25.873e-3  # 20°C
-#   Relative Permeability: 1
-#   Relative Permittivity: 1
-
-# vacuum:  # equals air with reduced density, conductivity #DONE
-#   Density: 1.1885e-9
-#   Electric Conductivity: 0.0 
-#   Heat Capacity: 1006.4
-#   Heat Conductivity: 1.0e-10
-#   Relative Permeability: 1
-#   Relative Permittivity: 1
