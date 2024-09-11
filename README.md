@@ -46,13 +46,31 @@ A post-processing visualization engine, [ParaView](https://www.paraview.org/), i
 
 ## Simulation  Configuration
 
-The configuration of the simulation is stored in yml-files. 
+- [config_geometry.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_geometry.yml) contains the geometry parameters for the simulation mesh.
+- [config_mat.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_mat.yml) describe the material properties (all in SI units).
+- [ config_elmer.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_elmer.yml) enclose the employed Elmer solvers from [ ElmerManual](https://www.nic.funet.fi/pub/sci/physics/elmer/doc/ElmerSolverManual.pdf).
+- [ config_sim.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_sim.yml) refers to pecific parameters for this simulation, e.g. induction heater properties.
 
-- The geometry parameters are defined in [config_geometry.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_geometry.yml) that is generated using gmsh in [geometry.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/geometry.py).
-- the employed solvers [ config_elmer.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_elmer.yml) , while the  material properties (all in SI units) in [config_mat.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_mat.yml).
-- Specific parameters for this simulation, e.g. heater powers, are defined in [ config_sim.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_sim.yml).
+The configuration of the simulation is stored in yml-files. The parameters of e.g. a material are stored in this format :
+```python
+tin-solid:
+  Density: 7179.0
+  Electric Conductivity: 4.38e+6
+  Emissivity: 0.064
+  Heat Capacity: 244.0
+  Heat Conductivity: 60.0
+  Relative Permeability: 1
+  Relative Permittivity: 1
+  Solid: 'Logical True'
+  Melting Point: 505
+  Latent Heat: 5.96e+4 
+```
 
-Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/setup.py) to generate the mesh and the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/simdata/01/case.sif)  file with pyelmer and finally run Elmer. 
+### Execute Simulation
+
+Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/setup.py) to generate the mesh, the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/simdata/01/case.sif) with pyelmer, run ElmerGrid and ElmerSolver.
+
+
 
 ## Model description
 
@@ -61,5 +79,4 @@ The main features of [Test-CZ](https://github.com/nemocrys/ismcg-examples/tree/m
 - Induction heating of the crucible
 - Phase change: the interface between crystal and melt is shifted into the isothermal of the melting point
 
-
-<img src="TestCZ/mesh.png" alt="Geometry and mesh" width="300"/>
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/mesh.png">
