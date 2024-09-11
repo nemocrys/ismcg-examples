@@ -1,0 +1,34 @@
+
+T_ambient : 293.15
+
+boundaries:
+  bnd_melt:
+    htc: 3.0 
+    T_ext: 293.15
+  bnd_crystal_side:
+    htc: 6.0  
+    T_ext: 293.15
+  bnd_crucible:
+    htc: 6.0 
+    T_ext: 293.15
+  bnd_hotplate:
+    htc: 6.0 
+    T_ext: 293.15
+  inductor_inside:
+    T: 293.15
+  bnd_outer:
+    T: 293.15
+
+heating_induction:
+  frequency: 22.0e+3  # Hz
+  current: 600 # A
+
+# smart-heater:
+#   T: 505  #  melting point tin
+#   control-point: False  # if False: use T at melt-crystal interface (triple point)
+#   x: 0.005
+#   y: 0.01
+#   z: 0.0
+
+
+

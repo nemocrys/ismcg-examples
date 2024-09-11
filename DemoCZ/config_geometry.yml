@@ -1,0 +1,63 @@
+# meshing settings
+mesh:
+  size_factor: 1  # use this to change mesh size globally
+  order: 1  # 2nd order is better if you want to evaluate heat fluxes
+
+# geometry parameters
+
+melt:
+  h: 0.01 
+  r: 0.025
+  mesh_size: 0.0025
+  material: tin_liquid
+  T_init: 293.15 
+
+crucible:
+  r: 0.06
+  h: 0.03
+  hi: 0.015
+  mesh_size: 0.0025
+  material: aluminium
+  T_init: 293.15 
+  
+crystal:
+  r: 0.005
+  h: 0.12
+  mesh_size: 0.00125
+  material: tin_solid
+  T_init: 293.15 
+
+hotplate:
+  r: 0.09
+  h: 0.01
+  mesh_size: 0.0025
+  material: iron
+  T_init: 293.15 
+
+EM_coil:
+  r_in: 0.02
+  r_out: 0.07
+  h: 0.005
+  t: 0.04 # coil position
+  mesh_size: 0.0025
+  material: iron
+  T_init: 293.15 
+
+
+atmosphere: 
+  r: 0.3
+  h: 0.5
+  t: 0.135 
+  T_init: 293.15
+  material: air
+  mesh_size: 0.02 #
+
+
+container :
+  d: 0.2
+  r : 0.240
+  h : 0.79
+  width : 0.005
+  mesh_size: 0.003
+  material: steel-1.4541 
+  T_init: 293.15

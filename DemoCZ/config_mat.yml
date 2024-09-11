@@ -1,0 +1,77 @@
+# base material properties
+
+
+tin_solid:
+  Density : 7280
+  Heat Capacity : 257
+  Heat Conductivity : 60.0
+  Emissivity : 0.07  
+  Melting Point : 505
+  Latent Heat : 61000  
+  Electric Conductivity : 4.0e6
+  Relative Permeability : 1
+  Relative Permittivity: 1
+  Youngs Modulus : 50.0e9
+  Poisson Ratio : 0.389 # E=2G(1+p)
+  Reference Temperature : 505
+  Heat Expansion Coefficient : 22.0e-6
+
+tin_liquid:
+  Density : 6980.0
+  Heat Capacity : 257
+  Heat Conductivity : 32.0  
+  Emissivity : 0.1 
+  Heat expansion Coefficient : 0.0001  
+  Reference Temperature : 300.0  
+  Electric Conductivity : 1.2e6
+  Relative Permeability : 1
+  Relative Permittivity: 1
+
+# aluminium but graphite el. cond.
+aluminium: 
+  Density : 2700
+  Heat Capacity : 984
+  Heat Conductivity : 236  
+  Emissivity : 0.05  
+  # Electric Conductivity : Real 3.7e7
+  Electric Conductivity : 5.0e4 # !!!graphite!!! 
+  Relative Permeability : 1
+  Relative Permittivity: 1
+
+iron: #cast iron but zero el. cond.
+  Density : 7000
+  Heat Capacity : 500
+  Heat Conductivity : 50
+  Emissivity : 0.5
+  #! Electric Conductivity : 2.0e6  
+  Electric Conductivity : 0.0 # !!!zero!!!
+  Relative Permeability : 1
+  Relative Permittivity: 1
+
+
+air:
+  Density : 1
+  Heat Capacity : 1000
+  Heat Conductivity : 0.03  
+  Heat expansion Coefficient : 0.003  
+  Reference Temperature : 300.0  
+  Electric Conductivity : 0.0
+  Relative Permeability : 1
+  Relative Permittivity: 1
+
+
+# air:        #DONE
+#   Density: 1.1885  # 20°C
+#   Electric Conductivity: 0.0 
+#   Heat Capacity: 1006.4  # 20°C
+#   Heat Conductivity: 25.873e-3  # 20°C
+#   Relative Permeability: 1
+#   Relative Permittivity: 1
+
+# vacuum:  # equals air with reduced density, conductivity #DONE
+#   Density: 1.1885e-9
+#   Electric Conductivity: 0.0 
+#   Heat Capacity: 1006.4
+#   Heat Conductivity: 1.0e-10
+#   Relative Permeability: 1
+#   Relative Permittivity: 1
