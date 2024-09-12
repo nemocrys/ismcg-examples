@@ -42,7 +42,7 @@ tin-solid:
 
 Run [ geometry.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/geometry.py) to generate the simulation mesh.
 
-Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/setup.py) to generate the mesh (using geometry.py), the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/simdata/01/case.sif) with pyelmer, run ElmerGrid and ElmerSolver.
+Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/setup.py) to generate the mesh (using geometry.py), the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/simdata/01/case.sif) with pyelmer, run ElmerGrid and ElmerSolver.
 
 ## Geometry
 
@@ -59,7 +59,7 @@ Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main
 
 
 ---
-### Case 1 ***Work in progress***
+### Case 1 
 
 Global (Left) and melt(right) temperature field is calculated with HeatSolve module. The required power is adjusted automatically to reach the melting point of tin (i.e 505 K) at the crystal-melt interphase
 
@@ -72,9 +72,15 @@ Global (Left) and melt(right) temperature field is calculated with HeatSolve mod
 
 ## Melt, Gas flows ***Work in progress***
 
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_T.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_gas_velocity.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_melt_velocity.png" width="32%" />
+
+
 ## Thermal Stress ***Work in progress***
 
-### Case 3 ***Work in progress***
+
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_crystal_stress.png" width="45%" />
+
+### Case 3 
 
 In this case the HTCs (heat transfer coefficients) for each boundary and the inductor properties (blue part)  are regulated from the [ config_sim.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_sim.yml) file .
 
@@ -101,7 +107,7 @@ heating_induction:
   current: 600 
 ```
 
-## Temperature field at crystal-melt 
+### Temperature field at crystal-melt 
 
 <img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case3_T.png" width="45%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case3_melt.png" width="45%" />
 
