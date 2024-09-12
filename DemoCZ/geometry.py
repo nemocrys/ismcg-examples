@@ -13,10 +13,6 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
 
     model = Model(name)
     #--------------------------------------------- MELT --------------------------------------------- #
-    # 2) Vessel ?
-    # 3) material update? iron coil?
-    # 4) no solver phase change, should we include it ?
-    # 5) discuss body forces
     melt = Shape(model,2,"melt",[
             occ.add_rectangle(
                 0,
@@ -158,6 +154,18 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     MeshControlExponential(model, if_melt_crystal, melt.mesh_size / 5, exp=1.6, fact=3)
     MeshControlExponential(model, bnd_melt, melt.mesh_size / 5, exp=1.6, fact=3)
     MeshControlExponential(model, if_crucible_melt, melt.mesh_size / 5, exp=1.6, fact=3)
+
+
+    # mesh colour
+    gmsh.model.setColor(atmosphere.dimtags, 192,192,192)  
+    gmsh.model.setColor(crucible.dimtags,0,20,50)  
+    gmsh.model.setColor(EM_coil.dimtags,0,0,255)  
+    gmsh.model.setColor(hotplate.dimtags,165, 42, 42) 
+    gmsh.model.setColor(melt.dimtags, 173, 216, 230)  
+    gmsh.model.setColor(crystal.dimtags, 173, 216, 230) 
+
+
+    model.generate_mesh(**config["mesh"])
 
     model.generate_mesh(**config["mesh"])
     #------------------------------------------------------------------------ #

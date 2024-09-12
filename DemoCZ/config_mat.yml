@@ -12,7 +12,7 @@ tin_solid:
   Relative Permeability : 1
   Relative Permittivity: 1
   Youngs Modulus : 50.0e9
-  Poisson Ratio : 0.389 # E=2G(1+p)
+  Poisson Ratio : 0.389 # E:2G(1+p)
   Reference Temperature : 505
   Heat Expansion Coefficient : 22.0e-6
 
@@ -21,9 +21,11 @@ tin_liquid:
   Heat Capacity : 257
   Heat Conductivity : 32.0  
   Emissivity : 0.1 
+  #Viscosity : Real 2e-3
+  Viscosity : Real 2e-2 !!!10x!!!
   Heat expansion Coefficient : 0.0001  
   Reference Temperature : 300.0  
-  Electric Conductivity : 1.2e6
+  Electric Conductivity : Real 1.2e6
   Relative Permeability : 1
   Relative Permittivity: 1
 
@@ -53,9 +55,12 @@ air:
   Density : 1
   Heat Capacity : 1000
   Heat Conductivity : 0.03  
+  Compressibility Model : Incompressible
+  #Viscosity : Real 2e-5
+  Viscosity : Real 2e-3 !!!100x!!!
   Heat expansion Coefficient : 0.003  
   Reference Temperature : 300.0  
-  Electric Conductivity : 0.0
+  Electric Conductivity : Real 0.0
   Relative Permeability : 1
   Relative Permittivity: 1
 

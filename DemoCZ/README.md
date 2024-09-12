@@ -17,10 +17,10 @@ In [Demo-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/DemoCZ), three
 
 ## Simulation  Configuration
 
-- [config_geometry.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_geometry.yml) contains the geometry parameters for the simulation mesh.
-- [config_mat.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_mat.yml) describe the material properties (all in SI units).
-- [ config_elmer.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_elmer.yml) enclose the employed Elmer solvers from [ ElmerManual](https://www.nic.funet.fi/pub/sci/physics/elmer/doc/ElmerSolverManual.pdf).
-- [ config_sim.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_sim.yml) refers to pecific parameters for this simulation, e.g. induction heater properties.
+- [config_geometry.yml](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/config_geometry.yml) contains the geometry parameters for the simulation mesh.
+- [config_mat.yml](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/config_mat.yml) describe the material properties (all in SI units).
+- [ config_elmer.yml](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/config_elmer.yml) enclose the employed Elmer solvers from [ ElmerManual](https://www.nic.funet.fi/pub/sci/physics/elmer/doc/ElmerSolverManual.pdf).
+- [ config_sim.yml](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/config_sim.yml) refers to pecific parameters for this simulation, e.g. induction heater properties.
 
 The configuration of the simulation is stored in yml-files. The parameters of e.g. a material are stored in this format :
 ```python
@@ -40,9 +40,9 @@ tin-solid:
 ### Execute Simulation
 
 
-Run [ geometry.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/geometry.py) to generate the simulation mesh.
+Run [ geometry.py](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/geometry.py) to generate the simulation mesh.
 
-Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/setup.py) to generate the mesh (using geometry.py), the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/simdata/01/case.sif) with pyelmer, run ElmerGrid and ElmerSolver.
+Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/setup.py) to generate the mesh (using geometry.py), the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/simdata/01/case.sif) with pyelmer, run ElmerGrid and ElmerSolver.
 
 ## Geometry
 
@@ -68,14 +68,27 @@ Global (Left) and melt(right) temperature field is calculated with HeatSolve mod
 ---
 
 
-### Case 2 ***Work in progress***
+### Case 2 
 
-## Melt, Gas flows ***Work in progress***
+In this case is solved the Navier-Stokes equation for gas and melt and also estimated the thermal stress in the crystal.
 
-<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_T.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_gas_velocity.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_melt_velocity.png" width="32%" />
+For this purpose the [config_mat.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_mat.yml) file enriched with the nessesary material properties for each solver such as  Youngs Modulus, Poisson Ratio (Stress) and viscosity (Navier-Stokes). 
+Moreover the boundary conditions enriched accordingly for the new solvers, as it can be seen in the  [setup_flows.py](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/setup_flows.py).
+
+Finally, the stress calculation require second order elements which can be easily defined in [config_geometry.yml](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/config_geometry.yml) 
+
+```python
+mesh:
+  size_factor: 1  
+  order: 2  
+```
+
+## Melt, Gas flows 
+
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_T.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_gas_velocity.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_melt_velocity.png" width="32%" />
 
 
-## Thermal Stress ***Work in progress***
+## Thermal Stress 
 
 
 <img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_crystal_stress.png" width="45%" />

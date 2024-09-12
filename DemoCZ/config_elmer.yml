@@ -11,31 +11,6 @@ axisymmetric_steady:
   Output File: case.result
   Output Intervals: 0
 
-# HeatSolver:
-#   Exec Solver : Always
-#   Equation : HeatSolver
-#   Procedure: '"HeatSolve" "HeatSolver"'
-#   Variable: '"Temperature"'
-#   Variable Dofs : 1
-#   Calculate Loads : True
-#   Viewfactor combine elements : Logical True
-#   Update View Factors : Logical False
-#   Calculate Loads : Logical True  
-#   Steady State Convergence Tolerance : 1e-06
-#   Smart Heater Control After Tolerance : 0.0001
-#   Stabilize : True
-#   Optimize Bandwidth : True
-#   Nonlinear System Convergence Tolerance : 1e-06
-#   Nonlinear System Max Iterations : 100
-#   Nonlinear System Relaxation Factor : 0.7
-#   Linear System Solver : Iterative
-#   Linear System Iterative Method : BiCGStab
-#   Linear System Max Iterations : 1000
-#   Linear System Preconditioning : ILU
-#   Linear System Precondition Recompute : 1
-#   Linear System Convergence Tolerance : 1e-08
-#   Linear System Abort Not Converged : True
-#   Linear System Residual Output : 1
 
 HeatSolver:
   Equation: 'Heat Equation'
@@ -59,6 +34,55 @@ HeatSolver:
   Linear System Abort Not Converged: True
   Linear System Residual Output: 1
   Smart Heater Control After Tolerance: 1.0e-2
+
+Navier-Stokes:
+  Exec Solver : Always
+  Equation : 'Navier-Stokes'
+  Procedure : '"FlowSolve" "FlowSolver"'
+  Variable : 'Flow Solution[Velocity:2 Pressure:1]'
+  Stabilize : True
+  Steady State Convergence Tolerance : 0.001
+  Nonlinear System Convergence Tolerance : 1.0e-6
+  Nonlinear System Max Iterations : 100
+  Nonlinear System Newton After Iterations : 3
+  Nonlinear System Newton After Tolerance : 1.0e-3
+  Nonlinear System Relaxation Factor : 0.5
+  Linear System Solver : Iterative
+  Linear System Iterative Method : BiCGStabL
+  BiCgStabl Polynomial Degree : 4
+  Linear System Max Iterations : 500
+  Linear System Convergence Tolerance : 1.0e-8
+  Linear System Preconditioning : ILU0
+  Linear System ILUT Tolerance : 1.0e-3
+  Linear System Abort Not Converged : True
+  Linear System Residual Output : 1
+  Linear System Precondition Recompute : 1
+
+Navier-Stokes_M:
+  Exec Solver : Always
+  Equation : 'Navier-StokesM'
+  Procedure : '"FlowSolve" "FlowSolver"'
+  Variable : 'Flow SolutionM[VelocityM:2 PressureM:1]'
+  
+  Stabilize : True
+  Steady State Convergence Tolerance : 0.001
+
+  Nonlinear System Convergence Tolerance : 1.0e-6
+  Nonlinear System Max Iterations : 100
+  Nonlinear System Newton After Iterations : 3
+  Nonlinear System Newton After Tolerance : 1.0e-3
+  Nonlinear System Relaxation Factor : 0.5
+
+  Linear System Solver : Iterative
+  Linear System Iterative Method : BiCGStabL
+  BiCgStabl Polynomial Degree : 4
+  Linear System Max Iterations : 500
+  Linear System Convergence Tolerance : 1.0e-8
+  Linear System Preconditioning : ILU0
+  Linear System ILUT Tolerance : 1.0e-3
+  Linear System Abort Not Converged : True
+  Linear System Residual Output : 1
+  Linear System Precondition Recompute : 1
 
 
 
