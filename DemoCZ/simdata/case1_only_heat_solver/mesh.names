@@ -1,0 +1,17 @@
+! ----- names for bodies -----
+$ melt = 1
+$ crucible = 2
+$ crystal = 3
+$ hotplate = 4
+$ atmosphere = 5
+! ----- names for boundaries -----
+$ if_melt_crystal = 6
+$ if_crucible_melt = 7
+$ if_crucible_hotplate = 8
+$ bnd_crystal_side = 9
+$ bnd_crystal_top = 10
+$ bnd_melt = 11
+$ bnd_crucible = 12
+$ bnd_hotplate = 13
+$ bnd_outer = 14
+$ symmetry_axis = 15
