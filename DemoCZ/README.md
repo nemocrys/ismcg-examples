@@ -52,7 +52,7 @@ Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main
 - Air : Silver
 
 
-<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/whole_mesh.png" width="45%" /> <img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/mesh.png"width="45%" />
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/whole_mesh.png" width="45%" /> <img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/mesh.png" width="45%" />
 
 
 
@@ -62,7 +62,7 @@ Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main
 
 Global (Left) and melt(right) temperature field is calculated with HeatSolve module. The required power is adjusted automatically to reach the melting point of tin (i.e 505 K) at the crystal-melt interphase
 
-<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case1_T_distribution.png"><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case1_melt.png">
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case1_T_distribution.png" width="45%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case1_melt.png" width="45%" />
 
 ---
 
