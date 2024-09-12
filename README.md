@@ -6,7 +6,7 @@ This repository contains two axisymmetric steady-state 2D cases of Czochralski c
 - [Demo-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/DemoCZ) case 
 - [Test-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/TestCZ) case 
 
-Additional and more advanced examples developed by the [ Model experiments group ](https://www.ikz-berlin.de/en/research/materials-science/section-fundamental-description-1) can be found here: [Opencgs examples](https://github.com/nemocrys/opencgs_examples?tab=readme-ov-file) 
+Additional and more advanced examples developed by the [ Model experiments group ](https://www.ikz-berlin.de/en/research/materials-science/section-fundamental-description-1) can be found here: [Opencgs examples](https://github.com/nemocrys/opencgs_examples?tab=readme-ov-file).
 
 
 ## Computational setup
@@ -20,11 +20,12 @@ Docker Image is a package of software that includes everything needed to run an 
 **For Windows:**
 
 1) Download and install [Docker](https://docs.docker.com/get-started/get-docker/). 
-2) Create a new empty folder ( ```<"my folder name"> ``` ) , where it will be used as working directory for Docker. 
-3) Copy the path of the folder(e.g ```C:\Users\admin\Private\<"my folder name">```)  
-4) Open Windows PowerShell 
-5) Navigate to the folder by ```cd C:\Users\admin\Private\<"my folder name"> ```. 
-6) Then run the following Docker command , which creates an interactive container from the [opencgs image](https://hub.docker.com/r/nemocrys/opencgs). 
+2) Create a new empty folder ( ```<"docker-project"> ``` ) , where it will be used as working directory for Docker. 
+3) Copy the path of the folder(e.g ```C:\Users\admin\Private\<"docker-project">```).  
+4) Open Windows PowerShell. 
+5) Navigate to the working directory by ```cd C:\Users\admin\Private\<"docker-project"> ```. 
+6) Type ```pwd``` at the terminal to confirm you are in the correct directory .
+7) Then run the following Docker command , which creates an interactive container from the [opencgs image](https://hub.docker.com/r/nemocrys/opencgs). 
 
 
 
@@ -34,7 +35,7 @@ docker run -it --rm -v ${PWD}:/home/workdir nemocrys/opencgs:v1.0.1 bash
 
 
 **For Linux:** \
-The five initial steps remain the same, but the last Docker command is :
+The initial steps to create a working directory remain the same, but the last Docker command is :
 
 ```
 docker run -it --rm -v $PWD:/home/workdir -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) nemocrys/opencgs:v1.0.1 bash
