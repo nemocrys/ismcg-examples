@@ -5,11 +5,12 @@ In [Demo-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/DemoCZ), three
 - **Case 1**:
   - Thermal simulation without magnet (blue part), include only HeatSolver
 - **Case 2**:
-  - Thermal calculation
+  - Thermal and Electromagnetic calculation   
   - velocity calculation for melt and gas
   - Thermal stress in the crystal
 - **Case 3**:
   - Thermal calculation with applied HTCs (heat transfer coefficients)
+  - Electromagnetic calculation 
 
 
 
@@ -75,4 +76,32 @@ Global (Left) and melt(right) temperature field is calculated with HeatSolve mod
 
 ### Case 3 ***Work in progress***
 
-## Temperature field at crystal,melt ***Work in progress***
+In this case the HTCs (heat transfer coefficients) for each boundary and the inductor properties (blue part)  are regulated from the [ config_sim.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_sim.yml) file .
+
+### HTCs
+```python
+boundaries:
+  bnd_melt:
+    htc: 3.0 
+    T_ext: 293.15
+  bnd_crystal_side:
+    htc: 6.0  
+    T_ext: 293.15
+  bnd_crucible:
+    htc: 6.0 
+    T_ext: 293.15
+  bnd_hotplate:
+    htc: 6.0 
+    T_ext: 293.15
+```
+### Inductor (SI units)
+```python
+heating_induction:
+  frequency: 22.0e+3 
+  current: 600 
+```
+
+## Temperature field at crystal-melt 
+
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case3_T.png" width="45%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case3_melt.png" width="45%" />
+
