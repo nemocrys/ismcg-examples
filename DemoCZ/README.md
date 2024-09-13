@@ -63,7 +63,7 @@ Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main
 
 Global (Left) and melt(right) temperature field is calculated with HeatSolve module. The required power is adjusted automatically to reach the melting point of tin (i.e 505 K) at the crystal-melt interphase
 
-<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case1_T_distribution.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case1_bodies_T.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case1_melt.png" width="32%" />
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case1_T_distribution.png" width="32%" height=500/><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case1_bodies_T.png" width="32%" height=500/><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case1_melt.png" width="32%" height=500/>
 
 ---
 
@@ -90,7 +90,7 @@ mesh:
 
 ## Melt, Gas flows 
 
-<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_T.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_gas_velocity.png" width="32%" height=500/><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_melt_velocity.png" width="32%" />
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_T.png" width="32%" height=600/><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_gas_velocity.png" width="32%" height=600/><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_melt_velocity.png" width="32%" height=400 />
 
 
 ## Thermal Stress 
