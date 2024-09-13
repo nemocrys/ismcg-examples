@@ -73,7 +73,7 @@ Global (Left) and melt(right) temperature field is calculated with HeatSolve mod
 In this case is solved the Navier-Stokes equation for gas and melt and also estimated the thermal stress in the crystal.
 
 For this purpose the [config_mat.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_mat.yml) file enriched with the nessesary material properties for each solver such as  Youngs Modulus, Poisson Ratio (Stress) and viscosity (Navier-Stokes). 
-Moreover the boundary conditions enriched accordingly for the new solvers, as it can be seen in the  [setup_flows.py](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/setup_flows.py).
+Moreover the boundary conditions enriched accordingly for the new solvers, as it can be seen in the  [setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/flows.py).
 
 Finally, the stress calculation require second order elements which can be easily defined in [config_geometry.yml](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/config_geometry.yml) 
 
@@ -93,6 +93,7 @@ Heat induction and Lorentz forces are calculated with MgDyn2DHarmonic module. Th
 ## Melt, Gas flows 
 
 Flows in melt and gas phases are calculated with FlowSolve module. Only buoyancy forces with Boussinesq approximation are considered.
+
 The pictures from left to right illustrate: the global temperature field, the atmospheric temperature and the vector gas velocity, the melt melt temperature field with the velocity vectors.
 
 <img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_T.png" width="32%" height=600/><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_gas_velocity.png" width="32%" height=600/><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_melt_velocity.png" width="32%" height=400 />
@@ -100,6 +101,7 @@ The pictures from left to right illustrate: the global temperature field, the at
 
 ## Thermal Stress 
 
+Thermal stress in the crystal is calculated with the StressSolve module assuming isotropic elastic properties (see [config_mat.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_mat.yml) ).
 
 <img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_crystal_stress.png" width="32%" />
 
