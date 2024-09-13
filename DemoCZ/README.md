@@ -83,6 +83,11 @@ mesh:
   order: 2  
 ```
 
+## Electromagnetism
+
+
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_joule_heating.png" width="45%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_lorentz.png" width="45%" />
+
 ## Melt, Gas flows 
 
 <img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_T.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_gas_velocity.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_melt_velocity.png" width="32%" />
