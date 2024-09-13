@@ -85,10 +85,15 @@ mesh:
 
 ## Electromagnetism
 
+Heat induction and Lorentz forces are calculated with MgDyn2DHarmonic module. The current cases acconted for an inductive cooking plate (coil with 600A current and 22 kHz frequency)
+
 
 <img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_joule_heating.png " width="45%" height=300 /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_lorentz.png" width="45%" height=300 />
 
 ## Melt, Gas flows 
+
+Flows in melt and gas phases are calculated with FlowSolve module. Only buoyancy forces with Boussinesq approximation are considered.
+The pictures from left to right illustrate: the global temperature field, the atmospheric temperature and the vector gas velocity, the melt melt temperature field with the velocity vectors.
 
 <img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_T.png" width="32%" height=600/><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_gas_velocity.png" width="32%" height=600/><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_melt_velocity.png" width="32%" height=400 />
 
