@@ -32,7 +32,7 @@ def simulation_pyelmer(
 
     # Equation Setup
 
-    #eqn_heat_EM = elmer.Equation(sim, "eqn_heat_EM", [solver_mgdyn, solver_calcfields , solver_heat ])  # Case 1
+    #eqn_heat_EM = elmer.Equation(sim, "eqn_heat_EM", [solver_heat ])  # Case 1
     eqn_heat_EM = elmer.Equation(sim, "eqn_heat_EM", [solver_mgdyn, solver_calcfields , solver_heat ])  # Case 2,3
     eqn_heat_EM_stress = elmer.Equation(sim, "eqn_heat_EM_stress", [solver_mgdyn, solver_calcfields , solver_heat, solver_stress ]) # Case 2
     eqn_flow_melt = elmer.Equation(sim, "eqn_flow_melt", [solver_mgdyn, solver_calcfields , solver_heat , solver_Navier_StokesM ]) # Case 2
