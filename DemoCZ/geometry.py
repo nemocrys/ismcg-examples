@@ -58,6 +58,17 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     crystal.params.material = config["crystal"]["material"]
     crystal.params.T_init = config["crystal"]["T_init"]   
 
+    # Substract the top part to form crystal cone
+    points = [
+    occ.add_point(config["crystal"]["cone_r"] , config["melt"]["h"] + config["crystal"]["h"]  , 0 ),
+    occ.add_point(config["crystal"]["r"] , config["melt"]["h"] + config["crystal"]["cone_h"], 0 ),
+    occ.add_point(config["crystal"]["r"] , config["melt"]["h"] + config["crystal"]["h"] , 0)]
+    lines = [occ.add_line(points[i - 1], points[i]) for i in range(len(points))]
+    loop = occ.add_curve_loop(lines)
+    cone_hole = occ.add_surface_filling(loop)
+
+    occ.cut(crystal.dimtags, [(2, cone_hole)])
+
     #--------------------------------------------- Hotplate --------------------------------------------- #
     hotplate = Shape(model,2,"hotplate",
         [
@@ -72,7 +83,7 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     hotplate.params.T_init = config["hotplate"]["T_init"] 
 
     #--------------------------------------------- EM Coil --------------------------------------------- #
-    EM_coil = Shape(model,2,"EM_coil",
+    EM_coil = Shape(model,2,"EM_coil",   # Removed for case 1
         [
             occ.add_rectangle(
                 config["EM_coil"]["r_in"],
@@ -124,7 +135,7 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
 
     # extract boundaries for surface-to-surface radiation
     bnd_crystal_side = Shape(model, 1, "bnd_crystal_side", crystal.get_interface(atmosphere))
-    bnd_crystal_top = Shape(model,1,"bnd_crystal_top",
+    bnd_crystal_top = Shape(model,1,"bnd_crystal_top", # this boundary is used for stress calculation
         crystal.get_boundaries_in_box(
             [0, config["crystal"]["r"]],
             [
@@ -155,7 +166,6 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     MeshControlExponential(model, bnd_melt, melt.mesh_size / 5, exp=1.6, fact=3)
     MeshControlExponential(model, if_crucible_melt, melt.mesh_size / 5, exp=1.6, fact=3)
 
-
     # mesh colour
     gmsh.model.setColor(atmosphere.dimtags, 192,192,192)  
     gmsh.model.setColor(crucible.dimtags,0,20,50)  
@@ -163,9 +173,6 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     gmsh.model.setColor(hotplate.dimtags,165, 42, 42) 
     gmsh.model.setColor(melt.dimtags, 173, 216, 230)  
     gmsh.model.setColor(crystal.dimtags, 173, 216, 230) 
-
-
-    model.generate_mesh(**config["mesh"])
 
     model.generate_mesh(**config["mesh"])
     #------------------------------------------------------------------------ #

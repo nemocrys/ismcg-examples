@@ -22,11 +22,6 @@ Equation 1
   Active Solvers(3) = 1 2 3   ! MagnetoDynamics2DHarmonic, MagnetoDynamicsCalcFields, HeatSolver, 
 End
 
-! eqn_heat_EM_stress
-Equation 2
-  Active Solvers(3) = 1 2 3   ! MagnetoDynamics2DHarmonic, MagnetoDynamicsCalcFields, HeatSolver, 
-End
-
 
 ! MagnetoDynamics2DHarmonic
 Solver 1
@@ -147,9 +142,10 @@ Material 3
   Heat Capacity = 257
   Heat Conductivity = 32.0
   Emissivity = 0.1
+  Viscosity = Real 2e-2 !!!10x!!!
   Heat expansion Coefficient = 0.0001
   Reference Temperature = 300.0
-  Electric Conductivity = 1.2e6
+  Electric Conductivity = Real 1.2e6
   Relative Permeability = 1
   Relative Permittivity = 1
 End
@@ -170,9 +166,11 @@ Material 5
   Density = 1
   Heat Capacity = 1000
   Heat Conductivity = 0.03
+  Compressibility Model = Incompressible
+  Viscosity = Real 2e-3 !!!100x!!!
   Heat expansion Coefficient = 0.003
   Reference Temperature = 300.0
-  Electric Conductivity = 0.0
+  Electric Conductivity = Real 0.0
   Relative Permeability = 1
   Relative Permittivity = 1
 End
@@ -190,7 +188,7 @@ End
 ! crystal
 Body 2
   Target Bodies(1) = 3
-  Equation = 2  ! eqn_heat_EM_stress
+  Equation = 1  ! eqn_heat_EM
   Initial Condition = 2  ! T_crystal
   Material = 2  ! tin_solid
   Body Force = 2  ! joule_heat
@@ -280,7 +278,7 @@ End
 ! bnd_crystal_top
 Boundary Condition 6
   Radiation = Idealized
-  External Temperature = 293.15
+  External Temperature = 0
   Target Boundaries(1) = 11
   Radiation External Temperature = 293.15
 End

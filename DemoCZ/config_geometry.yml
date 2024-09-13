@@ -24,6 +24,8 @@ crystal:
   r: 0.005
   h: 0.12
   mesh_size: 0.00125
+  cone_r : 0.001 
+  cone_h : 0.1
   material: tin_solid
   T_init: 293.15 
 
@@ -53,11 +55,3 @@ atmosphere:
   mesh_size: 0.02 #
 
 
-container :
-  d: 0.2
-  r : 0.240
-  h : 0.79
-  width : 0.005
-  mesh_size: 0.003
-  material: steel-1.4541 
-  T_init: 293.15
