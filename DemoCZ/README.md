@@ -134,5 +134,7 @@ heating_induction:
 
 ### Temperature field at crystal-melt 
 
+The temperature field for the whole domain and the melt, when convection is accounted
+
 <img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case3_T.png" width="45%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case3_melt.png" width="45%" />
 
