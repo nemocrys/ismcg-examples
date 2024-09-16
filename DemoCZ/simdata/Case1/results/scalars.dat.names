@@ -1,0 +1,21 @@
+Metadata for SaveScalars file: ./results/scalars.dat
+Elmer version: 9.0
+Elmer revision: c37d48654
+Elmer compilation date: 2024-04-26
+Solver input file: case.sif
+File started at: 2024/09/16 14:16:19
+ 
+Variables in columns of matrix: 
+   1: diffusive flux: temperature over bc 1
+   2: diffusive flux:  over bc 2
+   3: diffusive flux:  over bc 3
+   4: diffusive flux:  over bc 4
+   5: diffusive flux:  over bc 5
+   6: diffusive flux:  over bc 6
+   7: diffusive flux:  over bc 7
+   8: diffusive flux:  over bc 8
+   9: diffusive flux:  over bc 9
+  10: min diffusive flux:
+  11: max diffusive flux:
+  12: res: heater power scaling 1
+  13: res: heater power density 1

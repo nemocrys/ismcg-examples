@@ -107,6 +107,35 @@ Solver 4
   Show Variables = Logical True
 End
 
+! save_scalars
+Solver 5
+  Exec Solver = after saving
+  Equation = SaveScalars
+  Procedure = "SaveData" "SaveScalars"
+  Filename = "scalars.dat"
+  Output Directory = ./results
+  Operator 1 = diffusive flux
+  Variable 1 = Temperature
+  Coefficient 1 = Heat Conductivity
+  Operator 2 = int
+  Variable 2 = Joule heating
+  Operator 3 = body int
+  Variable 3 = Joule heating
+  Mask Name 3 = joule int EM_coil
+  Operator 4 = body int
+  Variable 4 = Joule heating
+  Mask Name 4 = joule int crystal
+  Operator 5 = body int
+  Variable 5 = Joule heating
+  Mask Name 5 = joule int melt
+  Operator 6 = body int
+  Variable 6 = Joule heating
+  Mask Name 6 = joule int crucible
+  Operator 7 = body int
+  Variable 7 = Joule heating
+  Mask Name 7 = joule int hotplate
+End
+
 
 ! iron
 Material 1
@@ -235,6 +264,7 @@ End
 Boundary Condition 1
   Heat Flux BC = True
   Heat Flux = 21289
+  Save Scalars = Logical True
   Save Line = Logical True
   Target Boundaries(1) = 7
 End
@@ -243,6 +273,7 @@ End
 Boundary Condition 2
   Radiation = Idealized
   External Temperature = 293.15
+  Save Scalars = Logical True
   Heat Transfer Coefficient = 3.0
   Target Boundaries(1) = 12
   Radiation External Temperature = 293.15
@@ -252,6 +283,7 @@ End
 Boundary Condition 3
   Radiation = Idealized
   External Temperature = 293.15
+  Save Scalars = Logical True
   Heat Transfer Coefficient = 6.0
   Target Boundaries(1) = 10
   Radiation External Temperature = 293.15
@@ -261,6 +293,7 @@ End
 Boundary Condition 4
   Radiation = Idealized
   External Temperature = 293.15
+  Save Scalars = Logical True
   Heat Transfer Coefficient = 6.0
   Target Boundaries(1) = 13
   Radiation External Temperature = 293.15
@@ -270,6 +303,7 @@ End
 Boundary Condition 5
   Radiation = Idealized
   External Temperature = 293.15
+  Save Scalars = Logical True
   Heat Transfer Coefficient = 6.0
   Target Boundaries(1) = 14
   Radiation External Temperature = 293.15
@@ -279,6 +313,7 @@ End
 Boundary Condition 6
   Radiation = Idealized
   External Temperature = 0
+  Save Scalars = Logical True
   Target Boundaries(1) = 11
   Radiation External Temperature = 293.15
 End
@@ -287,17 +322,20 @@ End
 Boundary Condition 7
   Radiation = Idealized
   External Temperature = 0
+  Save Scalars = Logical True
   Target Boundaries(1) = 15
   Radiation External Temperature = 293.15
 End
 
 ! if_crucible_melt
 Boundary Condition 8
+  Save Scalars = Logical True
   Target Boundaries(1) = 8
 End
 
 ! if_crucible_hotplate
 Boundary Condition 9
+  Save Scalars = Logical True
   Target Boundaries(1) = 9
 End
 
@@ -306,6 +344,7 @@ Boundary Condition 10
   Temperature = 293.15
   Potential Re = 0
   Potential Im = 0
+  Save Scalars = Logical True
   Target Boundaries(1) = 16
 End
 
@@ -328,18 +367,6 @@ Body Force 3
   Smart Heater Temperature = 505
 End
 
-! gas_flow
-Body Force 4
-  Boussinesq = True
-  Pressure Single Node = Real 0.0
-End
-
-! melt_flow
-Body Force 5
-  Boussinesq = True
-  Pressure Single Node = Real 0.0
-End
-
 
 ! T_EM_coil
 Initial Condition 1
@@ -354,8 +381,6 @@ End
 ! T_melt
 Initial Condition 3
   Temperature = 293.15
-  VelocityM 1 = Real 1.0e-9
-  VelocityM 2 = Real 0.0
 End
 
 ! T_crucible

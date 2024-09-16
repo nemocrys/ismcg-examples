@@ -197,3 +197,50 @@ SaveLine:
   Output Directory: './results'
   Variable 1: Temperature
 
+
+
+
+save_scalars:
+  Exec Solver: 'after saving'
+  Equation: SaveScalars
+  Procedure: '"SaveData" "SaveScalars"'
+  Filename: '"scalars.dat"'
+  Output Directory: './results'
+  
+  Operator 1 : 'diffusive flux'
+  Variable 1 : 'Temperature'
+  Coefficient 1 : 'Heat Conductivity'
+
+  Operator 2: int
+  Variable 2: Joule heating
+
+  Operator 3: body int
+  Variable 3: Joule heating
+  Mask Name 3: joule int EM_coil
+
+  Operator 4: body int
+  Variable 4: Joule heating
+  Mask Name 4: joule int crystal
+
+  Operator 5: body int
+  Variable 5: Joule heating
+  Mask Name 5: joule int melt
+
+  Operator 6: body int
+  Variable 6: Joule heating
+  Mask Name 6: joule int crucible  
+
+  Operator 7: body int
+  Variable 7: Joule heating
+  Mask Name 7: joule int hotplate  
+
+SavePolyline:
+  Exec Solver : After timestep
+  Equation :  '"SaveLine"'
+  Procedure : '"SaveData" "SaveLine"'
+  Filename : "polyline.dat"
+  Output Directory: './results'
+  Variable 1: Temperature
+  Exact Coordinates : Logical True
+  Polyline Coordinates(4,2) : 0.006 0.13 0.006 0.012 0.007 0.012 0.023 0.012
+  #Polyline Divisions(1) : 10

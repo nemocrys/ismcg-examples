@@ -1,7 +1,7 @@
 # meshing settings
 mesh:
   size_factor: 1  # use this to change mesh size globally
-  order: 2  # 2nd order is better if you want to evaluate heat fluxes
+  order: 1  # 2nd order is better if you want to evaluate heat fluxes
 
 # geometry parameters
 
