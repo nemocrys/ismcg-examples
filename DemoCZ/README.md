@@ -12,9 +12,6 @@ In [Demo-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/DemoCZ), three
   - Thermal calculation with applied HTCs (heat transfer coefficients)
   - Electromagnetic calculation 
 
-
-
-
 ## Simulation  Configuration
 
 - [config_geometry.yml](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/config_geometry.yml) contains the geometry parameters for the simulation mesh.
@@ -39,10 +36,9 @@ tin-solid:
 
 ### Execute Simulation
 
+Run [ geometry.py](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/geometry.py) to generate the simulation mesh using ```python3 geometry.py```
 
-Run [ geometry.py](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/geometry.py) to generate the simulation mesh.
-
-Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/setup.py) to generate the mesh (using geometry.py), the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/simdata/01/case.sif) with pyelmer, run ElmerGrid and ElmerSolver.
+Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/setup.py) using ```python3 simulation_setup.py``` to generate the mesh (using geometry.py) and the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/simdata/01/case.sif) with pyelmer, and then execute ElmerGrid and ElmerSolver.
 
 ## Geometry
 
