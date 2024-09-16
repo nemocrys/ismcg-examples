@@ -93,14 +93,14 @@ Flows in melt and gas phases are calculated with FlowSolve module. Only buoyancy
 
 The pictures from left to right illustrate: the global temperature field, the atmospheric temperature and the vector gas velocity, the melt melt temperature field with the velocity vectors.
 
-<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_T.png" width="32%" height=600/><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_gas_velocity.png" width="32%" height=600/><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_melt_velocity.png" width="32%" height=400 />
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_T.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/case2_gas_velocity.png" width="32%"/><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_melt_velocity.png" width="32%"/>
 
 
 ## Thermal Stress 
 
 Thermal stress in the crystal is calculated with the StressSolve module assuming isotropic elastic properties (see [config_mat.yml](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/config_mat.yml) ).
 
-<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_crystal_stress.png" width="32%" />
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_crystal_stress.png" width="32%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_crystal_stress_yy.png" width="32%" />
 
 ### Case 3 
 
