@@ -29,10 +29,10 @@ tin-solid:
 
 ### Execute Simulation
 
+Run [ geometry.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/geometry.py) to generate the simulation mesh using ```python3 geometry.py```
 
-Run [ geometry.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/geometry.py) to generate the simulation mesh.
+Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/setup.py) using ```python3 simulation_setup.py``` to generate the mesh (using geometry.py) and the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/simdata/01/case.sif) with pyelmer, and then execute ElmerGrid and ElmerSolver.
 
-Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/setup.py) to generate the mesh (using geometry.py), the [sif](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/simdata/01/case.sif) with pyelmer, run ElmerGrid and ElmerSolver.
 
 ## Geometry
 
