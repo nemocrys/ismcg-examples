@@ -1,3 +1,6 @@
+
+***WARNING: Work in progress!***
+
 ## Model description
 
 The main features of [Test-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/TestCZ) model are:
