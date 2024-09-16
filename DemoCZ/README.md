@@ -1,5 +1,6 @@
-## Model description
+***WARNING: Work in progress!***
 
+## Model description
 
 In [Demo-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/DemoCZ), three cases are included:
 - **Case 1**:
