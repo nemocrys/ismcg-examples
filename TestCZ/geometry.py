@@ -81,46 +81,7 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     ind_cut = inductor_filling(model,2, **config["inductor"],name="inductor_cut")
 
     
-    # x = config["inductor"]["X0"][0]
-    # y = config["inductor"]["X0"][1]
-    # d = config["inductor"]["d"]
-    # d_in = config["inductor"]["d_in"]
-    # n = config["inductor"]["n"]
-    # g =  config["inductor"]["g"]
-    # geo_ids = []
-    # for _ in range(n):
-    #     circle_1d = occ.addCircle(x, y, 0, d / 2)
-    #     circle = occ.addSurfaceFilling(occ.addCurveLoop([circle_1d]))
-    #     hole_1d = occ.addCircle(x, y, 0, d_in / 2)
-    #     hole = occ.addSurfaceFilling(occ.addCurveLoop([hole_1d]))
-    #     occ.synchronize()
-    #     occ.cut([(2, circle)], [(2, hole)])
-    #     y += g + d
-        
-
-    # ind = Shape(model,2, "inductor", [circle])
-    # ind.geo_ids.append(circle)
-
-
-    # x = config["inductor"]["X0"][0]
-    # y = config["inductor"]["X0"][1]
-    # d = config["inductor"]["d"]
-    # d_in = config["inductor"]["d_in"]
-    # n = config["inductor"]["n"]
-    # g =  config["inductor"]["g"]
-
-    # # ind_cut = Shape(model,2, "inductor_cut")
-    # geo_ids = []
-    # for _ in range(n):
-    #     #circle_1d = factory.addCircle(x, y, 0, d / 2)
-    #     #circle = factory.addSurfaceFilling(factory.addCurveLoop([circle_1d]))
-    #     hole_1d = factory.addCircle(x, y, 0, d_in / 2)
-    #     hole = factory.addSurfaceFilling(factory.addCurveLoop([hole_1d]))
-    #     occ.synchronize()
-    #     y += g + d
-        
-    # ind_cut = Shape(model,2, "inductor_cut",[hole])
-    # geo_ids.append(hole)
+ 
 
 
     #--------------------------------------------- crucible_adapter --------------------------------------------- #
