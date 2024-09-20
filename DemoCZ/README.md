@@ -89,7 +89,7 @@ boundaries:
 
 The temperature field for the whole domain and the melt, when convection is accounted
 
-<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_T_distribution.png.png" width="45%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_T_melt.png.png" width="45%" />
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_T_distributionpng" width="45%" /><img src="https://github.com/nemocrys/ismcg-examples/blob/main/DemoCZ/pics/Case2_T_melt.png" width="45%" />
 
 
 ## Thermal Stress 
