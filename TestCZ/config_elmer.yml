@@ -89,10 +89,14 @@ MeshUpdate:
   Linear System Residual Output: 1
   Steady State Convergence Tolerance: 1.0e-6
 
-SaveLine:
-  Exec Solver: 'after all'
-  Equation: '"SaveLine"'
-  Procedure: '"SaveData" "SaveLine"'
-  Filename: '"phase-if.dat"'
+
+save_scalars:
+  Exec Solver: 'after saving'
+  Equation: SaveScalars
+  Procedure: '"SaveData" "SaveScalars"'
+  Filename: '"scalars.dat"'
   Output Directory: './results'
-  Variable 1: Temperature
+  
+  Operator 1 : 'diffusive flux'
+  Variable 1 : 'Temperature'
+  Coefficient 1 : 'Heat Conductivity'

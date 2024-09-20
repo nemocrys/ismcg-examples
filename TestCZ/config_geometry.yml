@@ -4,7 +4,6 @@ mesh:
   order: 1  # 2nd order is better if you want to evaluate heat fluxes
 
 # geometry parameters
-
 melt:
   h: 0.03
   r: 0.05
@@ -13,11 +12,11 @@ melt:
   material: tin-liquid
 
 crucible:
-  h: 0.05  # drawing
+  h: 0.05  
   h_in: 0.04
-  r_in: 0.05  # drawing
-  r_out: 0.06  # drawing
-  t_bt: 0.01  # drawing
+  r_in: 0.05  
+  r_out: 0.06  
+  t_bt: 0.01  
   mesh_size: 0.0025
   T_init: 520
   material: graphite-CZ3R6300
@@ -30,9 +29,9 @@ crystal:
   T_init: 293.15 
 
 crucible_adapter:
-  r_in: 0.01  # drawing
+  r_in: 0.01  
   h: 0.045
-  r_out: 0.06  # drawing
+  r_out: 0.06 
   t_bt: 0.055
   mesh_size: 0.0025
   T_init: 313.15
@@ -40,23 +39,23 @@ crucible_adapter:
 
 
 axis_bt:
-  r_in: 0.0075  # measured
-  r_out: 0.02  # measured
-  h: 0.029 # variable
+  r_in: 0.0075  
+  r_out: 0.02  
+  h: 0.029 
   t_bt: 0.069
   mesh_size: 0.0025
   T_init: 323.15
   material: steel-1.4541
 
 seed:
-  r: 0.0009  # estimated
-  h: 0.04  # estimated
+  r: 0.0009  
+  h: 0.04  
   mesh_size: 0.0025
   T_init: 420
   material: tin-solid
 
 axis_top:
-  r: 0.01  # measured
+  r: 0.01  
   t: 0.17
   h: 0.144
   mesh_size: 0.0025
@@ -64,11 +63,11 @@ axis_top:
   material: steel-1.4541
 
 inductor:
-  d: 0.01  # construction
-  d_in: 0.008  # construction
-  g: 0.006  # averaged
+  d: 0.01  
+  d_in: 0.008  
+  g: 0.006  
   n: 3
-  X0: [0.075, -0.005]  # measured
+  X0: [0.075, -0.005]  
   T_init: 293.15
   material: copper-inductor
 

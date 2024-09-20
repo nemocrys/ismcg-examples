@@ -6,6 +6,7 @@ import yaml
 import matplotlib.pyplot as plt
 from my_tools import inductor
 from my_tools import inductor_filling
+from objectgmsh import *
 
 occ = gmsh.model.occ
 def geometry(config, sim_dir="./", name="vgf", visualize=False):
@@ -75,30 +76,53 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     axis_top.params.material = config["axis_top"]["material"]
     axis_top.params.T_init = config["axis_top"]["T_init"]  
     #--------------------------------------------- Inductors --------------------------------------------- #
+    
     ind = inductor(model,2, **config["inductor"],name="inductor")
     ind_cut = inductor_filling(model,2, **config["inductor"],name="inductor_cut")
+
     
     # x = config["inductor"]["X0"][0]
     # y = config["inductor"]["X0"][1]
-    # for _ in range(config["inductor"]["n"]):
-    #     circle_1d = occ.addCircle(x, y, 0, config["inductor"]["d"] / 2)
+    # d = config["inductor"]["d"]
+    # d_in = config["inductor"]["d_in"]
+    # n = config["inductor"]["n"]
+    # g =  config["inductor"]["g"]
+    # geo_ids = []
+    # for _ in range(n):
+    #     circle_1d = occ.addCircle(x, y, 0, d / 2)
     #     circle = occ.addSurfaceFilling(occ.addCurveLoop([circle_1d]))
-    #     hole_1d = occ.addCircle(x, y, 0, config["inductor"]["d_in"] / 2)
+    #     hole_1d = occ.addCircle(x, y, 0, d_in / 2)
     #     hole = occ.addSurfaceFilling(occ.addCurveLoop([hole_1d]))
     #     occ.synchronize()
     #     occ.cut([(2, circle)], [(2, hole)])
-    #     #ind.geo_ids.append(circle)
-    #     y += config["inductor"]["g"] + config["inductor"]["d"]
-    # ind = Shape(model, 2, "inductor",[circle])
+    #     y += g + d
+        
+
+    # ind = Shape(model,2, "inductor", [circle])
+    # ind.geo_ids.append(circle)
 
 
-    # for _ in range(config["inductor"]["n"]):
-    #     hole_1d = occ.addCircle(x, y, 0, config["inductor"]["d_in"] / 2)
-    #     hole = occ.addSurfaceFilling(occ.addCurveLoop([hole_1d]))
+    # x = config["inductor"]["X0"][0]
+    # y = config["inductor"]["X0"][1]
+    # d = config["inductor"]["d"]
+    # d_in = config["inductor"]["d_in"]
+    # n = config["inductor"]["n"]
+    # g =  config["inductor"]["g"]
+
+    # # ind_cut = Shape(model,2, "inductor_cut")
+    # geo_ids = []
+    # for _ in range(n):
+    #     #circle_1d = factory.addCircle(x, y, 0, d / 2)
+    #     #circle = factory.addSurfaceFilling(factory.addCurveLoop([circle_1d]))
+    #     hole_1d = factory.addCircle(x, y, 0, d_in / 2)
+    #     hole = factory.addSurfaceFilling(factory.addCurveLoop([hole_1d]))
     #     occ.synchronize()
-    #     #ind_cut.geo_ids.append(hole)
-    #     y += config["inductor"]["g"] + config["inductor"]["d"]
-    #     ind_cut = Shape(model, 2, "ind_cut",[hole])
+    #     y += g + d
+        
+    # ind_cut = Shape(model,2, "inductor_cut",[hole])
+    # geo_ids.append(hole)
+
+
     #--------------------------------------------- crucible_adapter --------------------------------------------- #
     crucible_adapter = Shape(model,2,"crucible_adapter",[
             occ.add_rectangle(
@@ -181,6 +205,7 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     if_axis_top__vessel= Shape(model,1,"if_axis_top__vessel",axis_top.get_interface(vessel))
     if_inductor__inductor_inside= Shape(model,1,"if_inductor__inductor_inside",ind.get_interface(ind_cut))
 
+
     # extract boundaries for surface-to-surface radiation
     bnd_crystal = Shape(model, 1, "bnd_crystal", crystal.get_interface(atmosphere))
     bnd_melt = Shape(model, 1, "bnd_melt", melt.get_interface(atmosphere))
@@ -211,13 +236,17 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     MeshControlExponential(model, if_crucible__melt, melt.mesh_size / 5, exp=1.6, fact=3)
     MeshControlExponential(model, bnd_ind, melt.mesh_size / 5, exp=1.6, fact=3)
 
-    # mesh colour
-    for body in [ crucible,axis_bt,crucible_adapter]: 
-        gmsh.model.setColor(body.dimtags, 0,0,50)  # black
-    gmsh.model.setColor(melt.dimtags, 192,192,192)  # blue
-    gmsh.model.setColor(atmosphere.dimtags, 173, 216, 230)  # light blue atmosphere
-    gmsh.model.setColor(vessel.dimtags, 0,0,255)  # blue
-    gmsh.model.setColor(crystal.dimtags, 192,192,192) 
+    gmsh.model.setColor(melt.dimtags, 173, 216, 230)  
+    gmsh.model.setColor(crystal.dimtags, 173, 216, 230) 
+    gmsh.model.setColor(atmosphere.dimtags, 192,192,192)  
+    gmsh.model.setColor(crucible.dimtags,0,20,50)  
+    gmsh.model.setColor(vessel.dimtags, 0,0,255)
+    gmsh.model.setColor(ind.dimtags, 255, 165, 0)
+    gmsh.model.setColor(seed.dimtags, 165, 42, 42)
+    for body in [ axis_bt,axis_top,crucible_adapter]: 
+         gmsh.model.setColor(body.dimtags, 88, 57, 39)  
+
+
     model.generate_mesh(**config["mesh"])
     #------------------------------------------------------------------------ #
     if visualize:

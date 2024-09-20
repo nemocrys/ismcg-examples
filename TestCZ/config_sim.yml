@@ -7,22 +7,13 @@ heating_induction:
   current: 100 # A
 
 boundaries:
-  crucible_outside:
-    htc: 1 # 6.5 # according to MMS Study
-    T_ext: 293.15
-  crystal:
-    htc: 1  # according to estimation from IKZ Jahresbericht
-    T_ext: 293.15
-  melt:
-    htc: 1 #6.5  # similar to crucible
-    T_ext: 293.15
   inductor_inside:
     T: 293.15
   container_outside:
     T: 293.15
 
 smart-heater:
-  T: 505 # 1813.15 # # melting point SGMZ
+  T: 505 
   control-point: False  # if False: use T at melt-crystal interface (triple point)
   x: 0.006
   y: 0.042

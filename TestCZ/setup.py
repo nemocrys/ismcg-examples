@@ -25,13 +25,13 @@ def simulation_pyelmer(
     solver_mesh = elmer.load_solver("MeshUpdate", sim, elmer_config_file)
     
     elmer.load_solver("ResultOutputSolver", sim, elmer_config_file)
-    elmer.load_solver("SaveLine", sim, elmer_config_file)
+    elmer.load_solver("save_scalars", sim, elmer_config_file)
 
     ### EQUATIONS SETUP
     eqn_main = elmer.Equation(sim, "eqn_main", [solver_mgdyn, solver_calcfields , solver_heat , solver_mesh ])
     eqn_phase_change = elmer.Equation(sim, "eqn_phase_change", [solver_phase_change])       
 
-    # forces
+    # FORCES SETUP
     current_source = elmer.BodyForce(sim, "Current Density")
 
     joule_heat = elmer.BodyForce(sim, "joule_heat")
@@ -107,7 +107,6 @@ def simulation_pyelmer(
     melt_crystal_if.initial_condition = t0_phase_change
 
     if_melt_crystal = elmer.Boundary(sim,"if_melt_crystal",[model["if_melt_crystal"].ph_id])
-    if_melt_crystal.save_line = True
     if_melt_crystal.normal_target_body = crystal
     if_melt_crystal.smart_heater = True
     if_melt_crystal.smart_heater_T = config["smart-heater"]["T"]
@@ -116,7 +115,7 @@ def simulation_pyelmer(
     if_melt_crystal.material = crystal.material
     if_melt_crystal.save_scalars = True
 
-    # boundaries with convection 
+    # crystal, melt boundaries
     for bnd in [
         "bnd_melt",
         "bnd_crystal",
@@ -124,8 +123,7 @@ def simulation_pyelmer(
         bnd = elmer.Boundary(sim, bnd, [model[bnd].ph_id])
         bnd.radiation = True
         bnd.mesh_update = [0, 0]
-        bnd.T_ext = config["boundaries"]["melt"]["T_ext"]
-        bnd.heat_transfer_coefficient = 1.0 # or denifed in the config file
+        bnd.save_scalars = True
 
     # add boundaries with surface-to-surface radiation
     for bnd in [
@@ -154,16 +152,19 @@ def simulation_pyelmer(
     ]:
         bnd = elmer.Boundary(sim, bnd, [model[bnd].ph_id])
         bnd.mesh_update = [0, 0]
+        bnd.save_scalars = True
 
     # add outside boundaries
     bnd = elmer.Boundary(sim, "if_inductor__inductor_inside", [model["if_inductor__inductor_inside"].ph_id])
     bnd.fixed_temperature = config["boundaries"]["inductor_inside"]["T"] # water cooled coil
     bnd.mesh_update = [0, 0]
+    bnd.save_scalars = True
 
     bnd = elmer.Boundary(sim, "bnd_outer_vessel", [model["bnd_outer_vessel"].ph_id])
     bnd.fixed_temperature = config["boundaries"]["container_outside"]["T"]
     bnd.zero_potential = True
     bnd.mesh_update = [0, 0]
+    bnd.save_scalars = True
 
         # symmetry axis
     bnd = elmer.Boundary(sim, "symmetry_axis", [model["symmetry_axis"].ph_id])
@@ -172,7 +173,7 @@ def simulation_pyelmer(
     sim.write_sif(sim_dir)
 
 if __name__ == "__main__":
-    sim_dir = "./simdata/01"
+    sim_dir = "./simdata/TestCZ"
     if os.path.exists(sim_dir):
         raise ValueError("Please remove the old simulation directory.")
 

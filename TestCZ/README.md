@@ -1,12 +1,11 @@
-
-***WARNING: Work in progress!***
-
 ## Model description
 
 The main features of [Test-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/TestCZ) model are:
 - Heat transfer through conduction and radiation
 - Induction heating of the crucible
 - Phase change: the interface between crystal and melt is shifted into the isothermal of the melting point
+
+In both cases, the total heat energy transfer across simulation bodies is evaluated. Through the *save_scalars* , it is possible to estimate integral heat fluxes (W) over surface boundary lines, defined in the  [ geometry.py](https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/geometry.py) file. The accuracy depends on mesh resolution near boundaries, hence, it is highly recommended to use 2nd order mesh elements for such calculations. This is a common computation not only to track the heat transfer within the volume but also to validate the energy balance.
 
 ## Simulation  Configuration
 
@@ -41,22 +40,21 @@ Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main
 
 - Liquid and solid tin(crystal) : Light Blue
 - Crucible : Black
-- Crucible adapter and bottom axis : Dark Blue
-- Vessel, axis top and seed : Blue
+- Crucible adapter and bottom,top axis : Brown
+- Vessel: Blue
 - Air : Silver
-- Coil : Yellow
+- Inductor : Orange
 
 2D steady-state electromagnetism and heat transfer simulation of the NEMOCRYS Test-CZ Furnace:
 
-<img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/pics/mesh1.png">
-
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/pics/mesh.png"><img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/pics/mesh_zoom.png">
 
 
 
 
 ## Temperature field
 
-Global temperature field is calculated with HeatSolve module. The required power is adjusted automatically to reach the melting point of tin (i.e 505 K) at the crystal-melt interphase
+Global temperature field is calculated with *HeatSolve* module. The Smart Heater Control was applied for scaling of this heat source term so that the desired temperature level, usually the melting temperature of Tin (i.e 505 K) at the crystal-melt interphase.
 
 ### Global temperature distribution
 <img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/pics/T_distrib.png">
