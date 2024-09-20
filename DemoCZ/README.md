@@ -41,7 +41,6 @@ Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main
 - Liquid and solid tin(crystal) : Light Blue
 - Crucible : Black
 - Hotplate : Red
-- Magnet : Blue
 - Air : Silver
 
 

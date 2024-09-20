@@ -1,5 +1,5 @@
  ASCII 3
-!File started at: 2024/09/20 16:24:32
+!File started at: 2024/09/20 19:44:41
  Degrees of freedom: 
 displacement             :     9908   31288   2 : linear elasticity
 stress[stress_xx:1 stress_yy:1 stress_zz:1 stress_xy:1 stress_yz:1 stress_xz:1] :    29724   31288   6 : linear elasticity

@@ -124,7 +124,6 @@ Material 2
   Heat Capacity = 257
   Heat Conductivity = 32.0
   Emissivity = 0.1
-  Viscosity = Real 2e-2 !!!10x!!!
   Heat expansion Coefficient = 0.0001
   Reference Temperature = 300.0
   Electric Conductivity = Real 1.2e6
@@ -160,7 +159,6 @@ Material 5
   Heat Capacity = 1000
   Heat Conductivity = 0.03
   Compressibility Model = Incompressible
-  Viscosity = Real 2e-3 !!!100x!!!
   Heat expansion Coefficient = 0.003
   Reference Temperature = 300.0
   Electric Conductivity = Real 0.0

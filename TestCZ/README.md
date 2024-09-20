@@ -47,7 +47,7 @@ Run [  simulation_setup.py](https://github.com/nemocrys/ismcg-examples/blob/main
 
 2D steady-state electromagnetism and heat transfer simulation of the NEMOCRYS Test-CZ Furnace:
 
-<img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/pics/mesh.png"><img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/pics/mesh_zoom.png">
+<img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/pics/mesh.png" width="45%" ><img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/pics/mesh_zoom.png" width="45%" >
 
 
 
