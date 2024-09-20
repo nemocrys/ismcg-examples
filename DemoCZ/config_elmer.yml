@@ -1,8 +1,5 @@
 # setup for Elmer simulation / solvers
 
-# Evrything at pyelmer/examples
-
-
 axisymmetric_steady:
   Max Output Level: 4
   Coordinate System: Axi Symmetric
@@ -10,6 +7,7 @@ axisymmetric_steady:
   Steady State Max Iterations: 5
   Output File: case.result
   Output Intervals: 0
+
 
 
 HeatSolver:
@@ -63,16 +61,13 @@ Navier-Stokes_M:
   Equation : 'Navier-StokesM'
   Procedure : '"FlowSolve" "FlowSolver"'
   Variable : 'Flow SolutionM[VelocityM:2 PressureM:1]'
-  
   Stabilize : True
   Steady State Convergence Tolerance : 0.001
-
   Nonlinear System Convergence Tolerance : 1.0e-6
   Nonlinear System Max Iterations : 100
   Nonlinear System Newton After Iterations : 3
   Nonlinear System Newton After Tolerance : 1.0e-3
   Nonlinear System Relaxation Factor : 0.5
-
   Linear System Solver : Iterative
   Linear System Iterative Method : BiCGStabL
   BiCgStabl Polynomial Degree : 4
@@ -84,22 +79,18 @@ Navier-Stokes_M:
   Linear System Residual Output : 1
   Linear System Precondition Recompute : 1
 
-
-
 MagnetoDynamics2DHarmonic:
   Exec Solver: Before all
   Equation: MgDyn2DHarmonic
   Procedure: '"MagnetoDynamics2D" "MagnetoDynamics2DHarmonic"'
   Variable: 'Potential[Potential Re:1 Potential Im:1]'
   Variable Dofs: 2
-  
   Nonlinear System Max Iterations : 3
   Nonlinear System Convergence Tolerance :  1.0e-6
   Nonlinear System Relaxation Factor :  1
   Steady State Convergence Tolerance: 1.0e-6
   Stabilize: True
   Optimize Bandwidth: True
-
   Linear System Solver  :  Iterative
   Linear System Symmetric : True
   Linear System Convergence Tolerance  :  1.e-10
@@ -109,8 +100,6 @@ MagnetoDynamics2DHarmonic:
   Linear System preconditioning : ilu
   Linear System ILUT Tolerance : 1e-8
   Linear System Iterative Method  :  BicgstabL
-
-
 
 MagnetoDynamicsCalcFields:
   Exec Solver : Before all
@@ -132,7 +121,6 @@ MagnetoDynamicsCalcFields:
   Linear System Iterative Method : BicgstabL
   Nonlinear System Max Iterations : 3
 
-
 Elasticity:
   Exec Solver : Always
   Equation : Linear elasticity
@@ -141,10 +129,8 @@ Elasticity:
   Variable DOFs : Integer 2
   #! hierarchial p-element base (alternative for higher-order)
   Element : p:3
-
   Displace Mesh : Logical False
   Calculate Stresses : Logical True
-
   Linear System Solver : Direct
   Linear System Symmetric : Logical True
   Linear System Scaling : Logical False
@@ -153,15 +139,11 @@ Elasticity:
   Linear System Convergence Tolerance : 1.0e-8
   Linear System Max Iterations : 200
   Linear System Preconditioning : ILU2
-
   Nonlinear System Convergence Tolerance : Real 1.0e-7
   Nonlinear System Max Iterations : Integer 3
   Nonlinear System Relaxation Factor : Real 1
-
   Steady State Convergence Tolerance: 1.0e-6
   Optimize Bandwidth : True
-
-
 
 ResultOutputSolver:
   Exec Solver: 'after saving'
@@ -171,34 +153,6 @@ ResultOutputSolver:
   Save Geometry Ids : Logical True
   Ascii Output : Logical True
   Show Variables : Logical True
-
-SteadyPhaseChange:
-  Equation: PhaseSurface
-  Variable: '"PhaseSurface"'
-  Procedure: '"SteadyPhaseChange" "SteadyPhaseChange"'
-  # Internal Mesh Movement: 'Logical True'
-
-MeshUpdate:
-  Equation: Mesh Update
-  Linear System Solver: Iterative
-  Linear System Iterative Method: BiCGStab
-  Linear System Preconditioning: ILU1
-  Linear System Max Iterations: 10000
-  Linear System Convergence Tolerance: 1.0e-9
-  Linear System Residual Output: 1
-  Steady State Convergence Tolerance: 1.0e-6
-
-
-SaveLine:
-  Exec Solver: 'after all'
-  Equation: '"SaveLine"'
-  Procedure: '"SaveData" "SaveLine"'
-  Filename: '"phase-if.dat"'
-  Output Directory: './results'
-  Variable 1: Temperature
-
-
-
 
 save_scalars:
   Exec Solver: 'after saving'
@@ -210,37 +164,3 @@ save_scalars:
   Operator 1 : 'diffusive flux'
   Variable 1 : 'Temperature'
   Coefficient 1 : 'Heat Conductivity'
-
-  Operator 2: int
-  Variable 2: Joule heating
-
-  Operator 3: body int
-  Variable 3: Joule heating
-  Mask Name 3: joule int EM_coil
-
-  Operator 4: body int
-  Variable 4: Joule heating
-  Mask Name 4: joule int crystal
-
-  Operator 5: body int
-  Variable 5: Joule heating
-  Mask Name 5: joule int melt
-
-  Operator 6: body int
-  Variable 6: Joule heating
-  Mask Name 6: joule int crucible  
-
-  Operator 7: body int
-  Variable 7: Joule heating
-  Mask Name 7: joule int hotplate  
-
-SavePolyline:
-  Exec Solver : After timestep
-  Equation :  '"SaveLine"'
-  Procedure : '"SaveData" "SaveLine"'
-  Filename : "polyline.dat"
-  Output Directory: './results'
-  Variable 1: Temperature
-  Exact Coordinates : Logical True
-  Polyline Coordinates(4,2) : 0.006 0.13 0.006 0.012 0.007 0.012 0.023 0.012
-  #Polyline Divisions(1) : 10

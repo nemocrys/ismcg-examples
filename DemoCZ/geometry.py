@@ -82,20 +82,6 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     hotplate.params.material = config["hotplate"]["material"]
     hotplate.params.T_init = config["hotplate"]["T_init"] 
 
-    #--------------------------------------------- EM Coil --------------------------------------------- #
-    EM_coil = Shape(model,2,"EM_coil",   # Removed for case 1
-        [
-            occ.add_rectangle(
-                config["EM_coil"]["r_in"],
-                -config["EM_coil"]["t"],
-                0,
-                config["EM_coil"]["r_out"],
-                config["EM_coil"]["h"], )])
-    EM_coil.mesh_size = config["EM_coil"]["mesh_size"]
-    EM_coil.params.material = config["EM_coil"]["material"]
-    EM_coil.params.T_init = config["EM_coil"]["T_init"] 
-    EM_coil.params.area = config["EM_coil"]["r_out"] * config["EM_coil"]["h"] 
-
     #--------------------------------------------- Atmosphere --------------------------------------------- #
     atmosphere = occ.add_rectangle(
         0,
@@ -120,7 +106,6 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
         + crucible.dimtags
         + crystal.dimtags
         + hotplate.dimtags
-        + EM_coil.dimtags
         + atmosphere.dimtags,
         [],
     )
@@ -146,7 +131,6 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     bnd_melt = Shape(model, 1, "bnd_melt", melt.get_interface(atmosphere))
     bnd_crucible = Shape(model, 1, "bnd_crucible", crucible.get_interface(atmosphere))
     bnd_hotplate = Shape(model, 1, "bnd_hotplate", hotplate.get_interface(atmosphere))
-    bnd_EM_coil = Shape(model, 1, "bnd_EM_coil", EM_coil.get_interface(atmosphere))
     bnd_outer = Shape(model,1,"bnd_outer",[atmosphere.bottom_boundary,atmosphere.top_boundary, atmosphere.right_boundary])
 
     # symmetry axis
@@ -169,7 +153,6 @@ def geometry(config, sim_dir="./", name="vgf", visualize=False):
     # mesh colour
     gmsh.model.setColor(atmosphere.dimtags, 192,192,192)  
     gmsh.model.setColor(crucible.dimtags,0,20,50)  
-    gmsh.model.setColor(EM_coil.dimtags,0,0,255)  
     gmsh.model.setColor(hotplate.dimtags,165, 42, 42) 
     gmsh.model.setColor(melt.dimtags, 173, 216, 230)  
     gmsh.model.setColor(crystal.dimtags, 173, 216, 230) 

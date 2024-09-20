@@ -36,16 +36,6 @@ hotplate:
   material: iron
   T_init: 293.15 
 
-EM_coil:
-  r_in: 0.02
-  r_out: 0.07
-  h: 0.005
-  t: 0.04 # coil position
-  mesh_size: 0.0025
-  material: iron
-  T_init: 293.15 
-
-
 atmosphere: 
   r: 0.3
   h: 0.5

@@ -61,7 +61,7 @@ Global temperature field is calculated with HeatSolve module. The required power
 ### Global temperature distribution
 <img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/pics/T_distrib.png">
 
-
-### temperature distribution at crystal- melt
+---
+### Temperature distribution at crystal- melt
 
 <img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/pics/melt-crucible.png"><img src="https://github.com/nemocrys/ismcg-examples/blob/main/TestCZ/pics/melt.png">

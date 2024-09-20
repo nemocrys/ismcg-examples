@@ -3,7 +3,7 @@ Elmer version: 9.0
 Elmer revision: c37d48654
 Elmer compilation date: 2024-04-26
 Solver input file: case.sif
-File started at: 2024/09/16 14:16:19
+File started at: 2024/09/20 16:19:44
  
 Variables in columns of matrix: 
    1: diffusive flux: temperature over bc 1

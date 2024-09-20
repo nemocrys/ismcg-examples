@@ -16,10 +16,6 @@ Body 4
 End
 
 Body 5
-  Name = EM_coil
-End
-
-Body 6
   Name = atmosphere
 End
 
@@ -57,14 +53,10 @@ Boundary Condition 8
 End
 
 Boundary Condition 9
-  Name = bnd_EM_coil
-End
-
-Boundary Condition 10
   Name = bnd_outer
 End
 
-Boundary Condition 11
+Boundary Condition 10
   Name = symmetry_axis
 End
 
