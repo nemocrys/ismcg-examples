@@ -9,6 +9,31 @@ from my_tools import inductor_filling
 from objectgmsh import *
 
 occ = gmsh.model.occ
+
+# uses Gmsh Python API https://gmsh.info/doc/texinfo/gmsh.html
+# https://gitlab.onelab.info/gmsh/gmsh
+# Example function addRectangle:
+"""
+gmsh.model.occ.addRectangle(x, y, z, dx, dy, tag=-1, roundedRadius=0.)
+
+Add a rectangle in the OpenCASCADE CAD representation, with lower left
+corner at (`x', `y', `z') and upper right corner at (`x' + `dx', `y' +
+`dy', `z'). If `tag' is positive, set the tag explicitly; otherwise a new
+tag is selected automatically. Round the corners if `roundedRadius' is
+nonzero. Return the tag of the rectangle.
+
+Return an integer.
+
+Types:
+- `x': double
+- `y': double
+- `z': double
+- `dx': double
+- `dy': double
+- `tag': integer
+- `roundedRadius': double
+"""
+
 def geometry(config, sim_dir="./", name="vgf", visualize=False):
     if not os.path.exists(sim_dir):
         os.makedirs(sim_dir)

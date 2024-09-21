@@ -123,11 +123,10 @@ def simulation_pyelmer(model, config, sim_dir="./simdata", config_mat={}, elmer_
 
 
 ###--- The part below is responsible to execute the simulation run and always remain the same ---###
-
 if __name__ == "__main__":
     sim_dir = "./simdata/Case1"
     if os.path.exists(sim_dir):
-        raise ValueError("Please remove the old simulation directory.")
+        raise ValueError(f"{sim_dir} exists. Please remove the old simulation directory.")
 
     with open("config_geometry.yml") as f:
         config_geo = yaml.safe_load(f)

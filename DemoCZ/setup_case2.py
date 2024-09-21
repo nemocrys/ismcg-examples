@@ -22,8 +22,8 @@ def simulation_pyelmer(model, config, sim_dir="./simdata", config_mat={}, elmer_
 
 
     # EQUATION SETUP
-    eqn_heat = elmer.Equation(sim, "eqn_heat_EM", [solver_heat ])  # Case 1
-    eqn_heat_stress = elmer.Equation(sim, "eqn_heat_EM_stress", [ solver_heat, solver_stress ]) # Case 2
+    eqn_heat = elmer.Equation(sim, "eqn_heat", [solver_heat ])  
+    eqn_heat_stress = elmer.Equation(sim, "eqn_heat_stress", [ solver_heat, solver_stress ]) # Case 2
 
 
     # FORCE SETUP
@@ -133,7 +133,7 @@ def simulation_pyelmer(model, config, sim_dir="./simdata", config_mat={}, elmer_
 if __name__ == "__main__":
     sim_dir = "./simdata/Case2"
     if os.path.exists(sim_dir):
-        raise ValueError("Please remove the old simulation directory.")
+        raise ValueError(f"{sim_dir} exists. Please remove the old simulation directory.")
 
     with open("config_geometry.yml") as f:
         config_geo = yaml.safe_load(f)
