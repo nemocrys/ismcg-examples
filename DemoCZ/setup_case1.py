@@ -13,7 +13,6 @@ def simulation_pyelmer(model, config, sim_dir="./simdata", config_mat={}, elmer_
 
     ###--- In the first part, we load the solvers from the elmer.yml file and then combine them to form different equations, which will subsequently be applied to simulation bodies. ---###
 
-
     # SOLVER SETUP
     sim = elmer.load_simulation("axisymmetric_steady", elmer_config_file)
     solver_heat = elmer.load_solver("HeatSolver", sim, elmer_config_file)
@@ -32,9 +31,8 @@ def simulation_pyelmer(model, config, sim_dir="./simdata", config_mat={}, elmer_
     hotplate_force.smart_heater_control_point = [
         0.005,
         0.01,
-        0.0,
-    ]
-    hotplate_force.smart_heater_T = 505 # Tin melting point
+        0.0]
+    hotplate_force.smart_heater_T = 505 # tin melting point
 
 
     ###--- At the next section we assign : initial conditions, material, equations, forces to every body of the domain ---###
@@ -74,8 +72,6 @@ def simulation_pyelmer(model, config, sim_dir="./simdata", config_mat={}, elmer_
         if shape == "hotplate":  # hotplace is the heat source
             bdy.body_force = hotplate_force
         
-
-
 
     ###--- In the final section, Boundary Conditions are defined. Each Boundary must contain variable information essential for the equations-solvers that we are solving within the simulation domain.---###
 
@@ -117,14 +113,14 @@ def simulation_pyelmer(model, config, sim_dir="./simdata", config_mat={}, elmer_
         bnd = elmer.Boundary(sim, bnd, [model[bnd].ph_id])
         bnd.save_scalars = True        
 
-
     # Boundary conditions at the outer part of the simulation domain
-
     bnd = elmer.Boundary(sim, "bnd_outer", [model["bnd_outer"].ph_id])
     bnd.fixed_temperature = config["boundaries"]["bnd_outer"]["T"]
     bnd.save_scalars = True
 
     sim.write_sif(sim_dir)
+
+
 
 ###--- The part below is responsible to execute the simulation run and always remain the same ---###
 

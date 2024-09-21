@@ -120,7 +120,6 @@ def simulation_pyelmer(model, config, sim_dir="./simdata", config_mat={}, elmer_
         bnd = elmer.Boundary(sim, bnd, [model[bnd].ph_id])
         bnd.save_scalars = True        
 
-    
     # Outside boundary. Here is set the most important boundary condition, as we confine the equations to be solved up to this point
     bnd = elmer.Boundary(sim, "bnd_outer", [model["bnd_outer"].ph_id])
     bnd.fixed_temperature = config["boundaries"]["bnd_outer"]["T"]
