@@ -1,4 +1,3 @@
-# sim-demo-cz
 
 This case demonstrates the use of Gmsh with a GEO script and Elmer with a SIF script, i.e. without the Python interface
 
