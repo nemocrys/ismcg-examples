@@ -3,6 +3,7 @@
 
 This repository contains two axisymmetric steady-state 2D cases of Czochralski crystal growth using [Elmer](https://www.elmerfem.org/blog/).
 
+- [Demo-CZ without Python](https://github.com/nemocrys/ismcg-examples/tree/main/DemoCZ-withoutPython) case just for reference: 
 - [Demo-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/DemoCZ) case 
 - [Test-CZ](https://github.com/nemocrys/ismcg-examples/tree/main/TestCZ) case 
 

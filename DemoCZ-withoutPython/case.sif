@@ -1,0 +1,582 @@
+
+Header
+  CHECK KEYWORDS "Warn"
+  Mesh DB "." "case"
+End
+
+Simulation
+  Max Output Level = 4
+  Coordinate System = Axi Symmetric
+  Coordinate Mapping(3) = 1 2 3
+  
+  Simulation Type = Steady state
+  Steady State Max Iterations = 3
+  Output File = case.result
+  
+  Frequency = Real 22000.0
+End
+
+Constants
+  Stefan Boltzmann = 5.6704e-08
+  Gravity(4) = 0 -1 0 9.82
+End
+
+
+! ---------- EQUATIONS AND SOLVERS ----------
+
+! heat, gas flow, EM
+Equation 1
+  Heat Equation = True
+  Convection = Computed
+  Active Solvers(4) = 1 2 4 5
+End
+
+! heat, melt flow, EM
+Equation 2
+  Heat Equation = True
+  Convection = Computed
+  Active Solvers(4) = 1 3 4 5
+End
+
+! heat, EM
+Equation 3
+  Heat Equation = True
+  Active Solvers(3) = 1 4 5
+End
+
+! heat, EM, stress
+Equation 4
+  Heat Equation = True 
+  Active Solvers(4) = 1 4 5 6
+End
+
+
+Solver 1
+  Exec Solver = Always
+  Equation = HeatSolver
+  Procedure = "HeatSolve" "HeatSolver"
+  Variable = "Temperature"
+  Variable Dofs = 1
+  Calculate Loads = True
+  
+  Viewfactor combine elements = Logical True
+  Update View Factors = Logical False
+  Calculate Loads = Logical True  
+  
+  Steady State Convergence Tolerance = 1e-06
+  Smart Heater Control After Tolerance = 0.0001
+  Stabilize = True
+  Optimize Bandwidth = True
+  
+  Nonlinear System Convergence Tolerance = 1e-06
+  Nonlinear System Max Iterations = 100
+  Nonlinear System Relaxation Factor = 0.7
+  
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 1000
+  Linear System Preconditioning = ILU
+  Linear System Precondition Recompute = 1
+  Linear System Convergence Tolerance = 1e-08
+  Linear System Abort Not Converged = True
+  Linear System Residual Output = 1
+End
+
+
+Solver 2
+  Exec Solver = Always
+  Equation = Navier-Stokes
+  Procedure = "FlowSolve" "FlowSolver"
+  Variable = Flow Solution[Velocity:2 Pressure:1]
+  
+  Stabilize = True
+  Steady State Convergence Tolerance = 0.001
+
+  Nonlinear System Convergence Tolerance = 1.0e-6
+  Nonlinear System Max Iterations = 100
+  Nonlinear System Newton After Iterations = 3
+  Nonlinear System Newton After Tolerance = 1.0e-3
+  Nonlinear System Relaxation Factor = 0.5
+
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStabL
+  BiCgStabl Polynomial Degree = 4
+  Linear System Max Iterations = 500
+  Linear System Convergence Tolerance = 1.0e-8
+  Linear System Preconditioning = ILU0
+  Linear System ILUT Tolerance = 1.0e-3
+  Linear System Abort Not Converged = True
+  Linear System Residual Output = 1
+  Linear System Precondition Recompute = 1
+End
+
+
+Solver 3
+  Exec Solver = Always
+  Equation = Navier-StokesM
+  Procedure = "FlowSolve" "FlowSolver"
+  Variable = Flow SolutionM[VelocityM:2 PressureM:1]
+  
+  Stabilize = True
+  Steady State Convergence Tolerance = 0.001
+
+  Nonlinear System Convergence Tolerance = 1.0e-6
+  Nonlinear System Max Iterations = 100
+  Nonlinear System Newton After Iterations = 3
+  Nonlinear System Newton After Tolerance = 1.0e-3
+  Nonlinear System Relaxation Factor = 0.5
+
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStabL
+  BiCgStabl Polynomial Degree = 4
+  Linear System Max Iterations = 500
+  Linear System Convergence Tolerance = 1.0e-8
+  Linear System Preconditioning = ILU0
+  Linear System ILUT Tolerance = 1.0e-3
+  Linear System Abort Not Converged = True
+  Linear System Residual Output = 1
+  Linear System Precondition Recompute = 1
+End
+
+
+Solver 4
+  Exec Solver = Before all
+  Equation = VecPotSol
+  Procedure = "MagnetoDynamics2D" "MagnetoDynamics2DHarmonic"
+  Variable = Potential[Potential Re:1 Potential Im:1]
+  Angular Frequency = Real 1.38e5 ! 22 kHz 
+
+  Linear System Solver = Iterative
+  Linear System Symmetric=True
+  Linear System Convergence Tolerance = 1.e-10
+  Linear System Max Iterations=1000
+  Linear System Residual Output=10
+  Linear System Abort not Converged=False
+  Linear System preconditioning=ilu
+  Linear System ILUT Tolerance=1e-8
+  Linear System Iterative Method = BicgstabL
+
+  Nonlinear System Max Iterations = 3
+  Nonlinear System Convergence Tolerance = 1.0e-6
+  Nonlinear System Relaxation Factor = 1
+End
+
+
+Solver 5
+  Exec Solver = Before all
+  Equation = CalcFields
+  Procedure = "MagnetoDynamics" "MagnetoDynamicsCalcFields"
+  Angular Frequency = Real 1.38e5 ! 22 kHz
+
+  Calculate Elemental Fields = Logical False
+  Calculate Nodal Fields = Logical True
+
+  Calculate Current Density = Logical True
+  Calculate Joule Heating = Logical True
+  Calculate JxB = Logical True  
+
+  Linear System Solver = Iterative
+  Linear System Symmetric=True
+  Linear System Convergence Tolerance = 1.e-10
+  Linear System Max Iterations=1000
+  Linear System Residual Output=10
+  Linear System Abort not Converged=False
+  Linear System preconditioning=ilu
+  Linear System ILUT Tolerance=1e-8
+  Linear System Iterative Method = BicgstabL
+
+  Nonlinear System Max Iterations = 3
+
+! Pick the right norm for consistency check
+!  Skip Compute Steady State Change = Logical True
+!  Show Norm Index = 1
+End
+
+
+Solver 6
+  Exec Solver = Always
+  Equation = Linear elasticity
+  Procedure = "StressSolve" "StressSolver"
+  Variable = "Displacement"
+  Variable DOFs = Integer 2
+  ! hierarchial p-element base (alternative for higher-order)
+  Element = p:3
+
+  Displace Mesh = Logical False
+  Calculate Stresses = Logical True
+
+  Linear System Solver = Direct
+  Linear System Symmetric = Logical True
+  Linear System Scaling = Logical False
+  Linear System Iterative Method = BiCGStab
+  Linear System Direct Method = UMFPACK
+  Linear System Convergence Tolerance = 1.0e-8
+  Linear System Max Iterations = 200
+  Linear System Preconditioning = ILU2
+
+  Nonlinear System Convergence Tolerance = Real 1.0e-7
+  Nonlinear System Max Iterations = Integer 3
+  Nonlinear System Relaxation Factor = Real 1
+
+  Steady State Convergence Tolerance= 1.0e-6
+  Optimize Bandwidth = True
+End
+
+
+Solver 7
+  Exec Solver = After timestep
+  Equation = ResultOutputSolver
+  Procedure = "ResultOutputSolve" "ResultOutputSolver"
+  VTU Format = Logical True
+  !Gmsh Format = Logical True
+  Save Geometry Ids = Logical True
+  Ascii Output = Logical True
+  Show Variables = Logical True
+  !Scalar Field 1 = String "Temperature"
+  !Scalar Field 2 = String "Velocity 1"
+  !Scalar Field 3 = String "Velocity 2"
+End
+
+
+Solver 8
+  Exec Solver = After timestep
+  Equation = String "SaveScalars"
+  Procedure = File "SaveData" "SaveScalars"
+  Filename = "probes_op.txt"
+
+  Operator 1 = boundary sum
+  Variable 1 = Temperature Loads 
+
+  Operator 2 = diffusive flux
+  Variable 2 = Temperature
+  Coefficient 2 = Heat Conductivity
+
+  Operator 3 = max
+  Variable 3 = Temperature
+
+  Variable 4 = joule heating  
+  Operator 4 = body int
+  Mask Name 4 = joule int
+
+  Operator 5 = body int
+  Variable 5 = jxb re 1
+  Mask Name 5 = jxb int
+
+  Operator 6 = body int
+  Variable 6 = jxb re 2
+  Mask Name 6 = jxb int
+  
+  Operator 7 = max
+  Variable 7 = Velocity
+  
+  Operator 8 = max
+  Variable 8 = VelocityM
+  
+  Operator 9 = max
+  Variable 9 = vonmises
+End
+
+
+Solver 9
+  Exec Solver = After timestep
+  Equation = String "SaveLine"
+  Procedure = "SaveData" "SaveLine"
+  Filename = "probes_line.txt"
+  
+  Exact Coordinates = Logical True
+  Polyline Coordinates(2,2) = 0.0 0.02 0.025 0.02
+  Polyline Divisions(1) = 100
+End
+
+! ---------- SOURCES ----------
+
+
+Initial Condition 1
+  Temperature = 295
+  Velocity 2 = 0.0
+  Velocity 1 = 1.0e-9
+  VelocityM 2 = Real 0.0
+  VelocityM 1 = Real 1.0e-9
+End
+
+
+! hot plate
+Body Force 1
+  Heat Source = 0.5614 ! J/kg (set to inverse mass for easy scaling)
+  Smart Heater Control = True
+  Smart Heater Temperature = 505
+  Smart Heater Control Point(3) = 0.005 0.025 0.0
+End
+
+! gas
+Body Force 2
+  Boussinesq = Logical True
+  !Flow BodyForce 2 = Variable "Temperature"
+  !  Real LUA "9.82*0.01*(tx[0]-0.5)"  
+  Pressure Single Node = Real 0.0
+End
+
+
+! Induction heating 22kHz, 30Ax20windings: 600A/(0.07*0.005) = 1.7e6
+Body Force 3
+  Current Density = Real 1.7e6
+  Current Density im = Real 0.0
+End
+
+
+! melt
+Body Force 4
+  ! Calculated Joule field is 2x too low??
+  ! Joule Heat = Logical True
+  
+  Pressure Single Node = Real 0.0
+  
+  Boussinesq = Logical True
+  !Lorentz Force = Logical True
+
+  ! Real part of jxB has correct Lorentz force formula
+  !Flow BodyForce 1 = Equals jxb re 1
+  !Flow BodyForce 2 = Equals jxb re 2
+
+  !Flow BodyForce 1 MATC = Variable "jxb re"
+  !  Real LUA "(tx[0])"
+  !  Real MATC "(tx(0))"
+  !Flow BodyForce 2 MATC = Variable "jxb re"
+  !  Real LUA "(tx[1])"
+  !  Real MATC "(tx(1))"
+End
+
+! ---------- VOLUMES ----------
+
+
+! crucible
+Body 1
+  Target Bodies(1) = 100
+  Equation = 3
+  Material = 3
+  Initial Condition = 1
+  joule int = Logical True
+End
+
+! melt with flow
+Body 2
+  Target Bodies(1) = 200
+  Equation = 2
+  Material = 2
+  Initial Condition = 1
+  Body Force = 4
+  joule int = Logical True
+  jxb int = Logical True
+End
+
+! crystal
+Body 3
+  Target Bodies(1) = 300
+  Equation = 4
+  Material = 1
+  Initial Condition = 1
+End
+
+! EM coil
+Body 4
+  Target Bodies(1) = 400 
+  Equation = 3
+  Material = 4
+  Initial Condition = 1
+  Body Force = 3
+End
+
+! plate with heat source
+Body 5
+  Target Bodies(1) = 500 
+  Equation = 3
+  Material = 4
+  Initial Condition = 1
+  Body Force = 1
+End
+
+! air with flow
+Body 6
+  Target Bodies(1) = 900 
+  Equation = 1
+  Material = 5
+  Initial Condition = 1
+  Body Force = 2
+End
+
+
+! ---------- BOUNDARIES ----------
+
+
+! melt-crystal
+Boundary Condition 1
+  Target Boundaries(1) = 211
+  Heat Flux BC = True
+  Heat Flux = 21289
+  VelocityM 2 = Real 0.0
+  VelocityM 1 = Real 0.0
+  Save Scalars = Logical True
+End
+
+
+! melt-crucible
+Boundary Condition 2
+  Target Boundaries(1) = 212
+  VelocityM 2 = Real 0.0
+  VelocityM 1 = Real 0.0
+End
+
+
+! melt-surface
+Boundary Condition 3
+  Target Boundaries(1) = 210
+  Radiation = Idealized
+  Radiation External Temperature = 300.0
+  !Heat Transfer Coefficient = 3.5
+  !External Temperature = 300.0
+  Velocity 2 = 0.0
+  Velocity 1 = 0.0
+  VelocityM 2 = Real 0.0
+  VelocityM 1 = Real 0.0
+  Save Scalars = Logical True
+End
+
+
+! crystal side
+Boundary Condition 4
+  Target Boundaries(1) = 310
+  Radiation = Idealized
+  Radiation External Temperature = 300.0
+  !Heat Transfer Coefficient = 3.5
+  !External Temperature = 300.0
+  Velocity 2 = 0.0
+  Velocity 1 = 0.0
+  Save Scalars = Logical True
+End
+
+
+! crystal end
+Boundary Condition 5
+  Target Boundaries(1) = 311
+  Velocity 2 = 0.0
+  Velocity 1 = 0.0
+  !Displacement 1 = 0.0
+  Displacement 2 = 0.0
+End
+
+
+! crucible
+Boundary Condition 6
+  Target Boundaries(1) = 111
+  Radiation = Idealized
+  Radiation External Temperature = 300.0
+  !Heat Transfer Coefficient = 3.5
+  !External Temperature = 300.0
+  Velocity 2 = 0.0
+  Velocity 1 = 0.0
+  Save Scalars = Logical True
+End
+
+
+! hotplate
+Boundary Condition 7
+  Target Boundaries(1) = 510
+  Radiation = Idealized
+  Radiation External Temperature = 300.0
+  !Heat Transfer Coefficient = 3.5
+  !External Temperature = 300.0
+  Velocity 2 = 0.0
+  Velocity 1 = 0.0
+  Save Scalars = Logical True
+End
+
+
+! magnet
+Boundary Condition 8
+  Target Boundaries(1) = 410
+  Velocity 2 = 0.0
+  Velocity 1 = 0.0
+End
+
+
+! outer
+Boundary Condition 9
+  Target Boundaries(1) = 910
+  Temperature = 300.0
+  Velocity 2 = 0.0
+  Velocity 1 = 0.0
+  Potential Re = Real 0.0
+  Potential Im = Real 0.0
+End
+
+
+! ---------- MATERIALS ----------
+
+
+! tin_solid
+Material 1
+  Density = 7280
+  Heat Capacity = 257
+  Heat Conductivity = 60.0
+  Emissivity = 0.07  
+  Melting Point = 505
+  Latent Heat = 61000  
+  Electric Conductivity = Real 4e6
+  Relative Permeability = 1
+  Youngs Modulus = Real 50e9
+  Poisson Ratio = Real 0.389 ! E=2G(1+p)
+  Reference Temperature = 505
+  Heat Expansion Coefficient = Real 22e-6
+End
+
+! tin_liquid
+Material 2
+  Density = 6980.0
+  Heat Capacity = 257
+  Heat Conductivity = 32.0  
+  Emissivity = 0.1
+  ! Viscosity = Real 2e-3
+  Viscosity = Real 2e-2 !!!10x!!!
+  Heat expansion Coefficient = 0.0001  
+  Reference Temperature = 300.0  
+  Electric Conductivity = Real 1.2e6
+  Relative Permeability = 1
+End
+
+! aluminium but graphite el. cond.
+Material 3
+  Density = 2700
+  Heat Capacity = 984
+  Heat Conductivity = 236  
+  Emissivity = 0.05  
+  ! Electric Conductivity = Real 3.7e7
+  Electric Conductivity = Real 5e4  !!!graphite!!! 
+  Relative Permeability = 1
+End
+
+! plate (cast iron but zero el. cond.)
+Material 4
+  Density = 7000
+  Heat Capacity = 500
+  Heat Conductivity = 50
+  Emissivity = 0.5
+  ! Electric Conductivity = Real 2e6  
+  Electric Conductivity = Real 0.0  !!!zero!!!
+  Relative Permeability = 1
+End
+
+! air
+Material 5
+  Density = 1
+  Heat Capacity = 1000
+  Heat Conductivity = 0.03  
+  Compressibility Model = Incompressible
+  ! Viscosity = Real 2e-5
+  Viscosity = Real 2e-3 !!!100x!!!
+  Heat expansion Coefficient = 0.003  
+  Reference Temperature = 300.0  
+  Electric Conductivity = Real 0.0
+  Relative Permeability = 1
+End
+
+
