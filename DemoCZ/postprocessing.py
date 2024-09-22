@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 def printSaveScalars(sim_dir):
-    print(f"\n \n---- print values in {sim_dir}/results/scalars.dat ----")
+    print(f"\n \n---- print heater power from {sim_dir}/results/scalars.dat ----")
     # Reading and processing the names file
     names = pd.read_csv(f'{sim_dir}/results/scalars.dat.names', sep="+", header=None, skiprows=8)
     names.columns = ['variable']
@@ -13,7 +13,7 @@ def printSaveScalars(sim_dir):
     # Create a DataFrame for better structure and readability
     result = pd.DataFrame({'Variable': names['variable'], 'Value': data})
     # Print the matched variables and their values
-    print(result.to_string(index=False))
+    print(result.tail(2).to_string(index=False))
 
 if __name__ == "__main__":
     sim_dir = "./simdata/Case1"
