@@ -6,7 +6,7 @@ from pyelmer.post import scan_logfile
 import yaml
 
 from geometry import geometry
-
+from postprocessing import printSaveScalars
 
 def simulation_pyelmer(model, config, sim_dir="./simdata", config_mat={}, elmer_config_file="config_elmer.yml"):
 
@@ -151,3 +151,4 @@ if __name__ == "__main__":
     print("Errors:", err)
     print("Warnings:", warn)
     print("Statistics:", stats)
+    printSaveScalars(sim_dir)
