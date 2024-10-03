@@ -1,4 +1,4 @@
-# Simulation examples for ISMCG 
+# Simulation examples for the 1st International School on Modelling in Crystal Growth (ISMCG), Timisoara, Romania, 19-21 September 2024
 
 This repository contains axisymmetric steady-state 2D cases of Czochralski crystal growth using [Elmer](https://www.elmerfem.org/blog/).
 
