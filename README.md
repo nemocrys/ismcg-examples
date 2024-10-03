@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/854842566.svg)](https://doi.org/10.5281/zenodo.13887455)
+
 # Simulation examples for ISMCG
 
 **1st International School on Modelling in Crystal Growth (ISMCG), Timisoara, Romania, 19-21 September 2024**
